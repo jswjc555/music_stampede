@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>1031</height>
+    <height>1001</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -71,7 +71,7 @@
      <widget class="QLCDNumber" name="lcdNumber">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>600</x>
         <y>20</y>
         <width>181</width>
         <height>71</height>
@@ -85,9 +85,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>900</y>
-        <width>200</width>
-        <height>100</height>
+        <y>875</y>
+        <width>125</width>
+        <height>125</height>
        </rect>
       </property>
       <property name="font">
@@ -108,10 +108,10 @@
      <widget class="QLabel" name="check_label_up">
       <property name="geometry">
        <rect>
-        <x>200</x>
-        <y>900</y>
-        <width>200</width>
-        <height>100</height>
+        <x>125</x>
+        <y>875</y>
+        <width>125</width>
+        <height>125</height>
        </rect>
       </property>
       <property name="font">
@@ -132,10 +132,10 @@
      <widget class="QLabel" name="check_label_down">
       <property name="geometry">
        <rect>
-        <x>400</x>
-        <y>900</y>
-        <width>200</width>
-        <height>100</height>
+        <x>250</x>
+        <y>875</y>
+        <width>125</width>
+        <height>125</height>
        </rect>
       </property>
       <property name="font">
@@ -156,10 +156,10 @@
      <widget class="QLabel" name="check_label_right">
       <property name="geometry">
        <rect>
-        <x>600</x>
-        <y>900</y>
-        <width>200</width>
-        <height>100</height>
+        <x>375</x>
+        <y>875</y>
+        <width>125</width>
+        <height>125</height>
        </rect>
       </property>
       <property name="font">
@@ -180,10 +180,10 @@
      <widget class="QLabel" name="perfect_lable">
       <property name="geometry">
        <rect>
-        <x>212</x>
-        <y>23</y>
-        <width>341</width>
-        <height>61</height>
+        <x>590</x>
+        <y>130</y>
+        <width>211</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -206,8 +206,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>800</width>
-        <height>1000</height>
+        <width>500</width>
+        <height>875</height>
        </rect>
       </property>
       <property name="text">
@@ -217,25 +217,6 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>26</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

@@ -9,5 +9,6 @@
         <file>start.png</file>
         <file>start_on.png</file>
         <file>main_back.png</file>
+        <file>zhuan.png</file>
     </qresource>
 </RCC>

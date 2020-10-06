@@ -1,5 +1,5 @@
 ﻿#include "mylabel.h"
-QStringList MyLabel::path(":/test.png");
+QStringList MyLabel::path(":/zhuan.png");
 MyLabel::MyLabel(QWidget *parent, int position, type mytype):QLabel(parent),position(position),mytype(mytype)
 {
     if(mytype==islong)

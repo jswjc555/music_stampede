@@ -29,6 +29,11 @@ MainWindow::MainWindow(QWidget *parent) :
                                  "QPushButton:hover{border-image: url(:/start_on.png)}");
     ui->exit_game->setStyleSheet("QPushButton{border-image: url(:/exit.png)}"
                                  "QPushButton:hover{border-image: url(:/exit_on.png)}");
+    QImage *main_back=new QImage; //新建一个image对象
+    ui->main_back_label->setScaledContents(true);//自适应大小
+    main_back->load(":/main_back.png"); //将图像资源载入对象img，注意路径，可点进图片右键复制路径
+    ui->main_back_label->setPixmap(QPixmap::fromImage(*main_back)); //将图片放入label，使用setPixmap,注意指针*img
+
 
 
 

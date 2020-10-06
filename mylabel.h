@@ -11,8 +11,8 @@
 #include <QtGlobal>//包含随机函数
 #define DEEP 900
 #define SPEED 3
-#define lable_width   200
-#define  lable_high  100
+#define lable_width   125
+#define  lable_high  125
 #define RAND QTime time1= QTime::currentTime();\
 qsrand(time1.msec()*90000000000+time1.second());
 enum type{disappear,canmove,islong,normal};
