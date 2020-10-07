@@ -31,7 +31,7 @@ public:
     int n=0;//总卡点数
     QList<int> sump;//卡点存储
     QFile *f=0;
-    QMediaPlayer*player=0;
+    QMediaPlayer *player=0;
     int score=0;//分数
     int nn=1;//已经卡点数
     int already=0;//已经过时长
@@ -60,6 +60,7 @@ private:
     Ui::MyMusic *ui;
     QMovie *dis;
     QMovie *pingjia;
+    QMovie *up_dis,*left_dis,*down_dis,*right_dis;
     QImage *gif_quiet;
 public slots:
     void deleteit();
@@ -67,6 +68,11 @@ public slots:
     void deletegif_up();
     void deletegif_right();
     void deletegif_down();
+    void up_quiet();
+    void left_quiet();
+    void down_quiet();
+    void right_quiet();
+
 signals:
     void gameover(int);
 private slots:

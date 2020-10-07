@@ -3,14 +3,20 @@
         <file>image/background.gif</file>
         <file>image/exit.png</file>
         <file>image/exit_on.png</file>
-        <file>image/main_back.png</file>
         <file>image/none.png</file>
         <file>image/start.png</file>
         <file>image/start_on.png</file>
         <file>image/zhuan.png</file>
-        <file>image/check_bar.png</file>
         <file>image/dis.gif</file>
         <file>image/perfect.gif</file>
         <file>image/good.gif</file>
+        <file>image/check_bar.png</file>
+        <file>image/main_back.png</file>
+        <file>image/long_key.png</file>
+        <file>image/short_key.png</file>
+        <file>image/dis_up.gif</file>
+        <file>image/dis_right.gif</file>
+        <file>image/dis_left.gif</file>
+        <file>image/dis_down.gif</file>
     </qresource>
 </RCC>

@@ -77,26 +77,13 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>489</y>
+       <y>484</y>
        <width>560</width>
-       <height>185</height>
+       <height>190</height>
       </rect>
      </property>
      <property name="text">
       <string>TextLabel</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="disappear_gif">
-     <property name="geometry">
-      <rect>
-       <x>590</x>
-       <y>440</y>
-       <width>201</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="left_gif">
@@ -151,6 +138,71 @@
       <string>TextLabel</string>
      </property>
     </widget>
+    <widget class="QLabel" name="down_cover">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>575</y>
+       <width>560</width>
+       <height>245</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="up_dis">
+     <property name="geometry">
+      <rect>
+       <x>152</x>
+       <y>576</y>
+       <width>120</width>
+       <height>120</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="left_dis">
+     <property name="geometry">
+      <rect>
+       <x>16</x>
+       <y>576</y>
+       <width>120</width>
+       <height>120</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="down_dis">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>576</y>
+       <width>120</width>
+       <height>120</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="right_dis">
+     <property name="geometry">
+      <rect>
+       <x>424</x>
+       <y>576</y>
+       <width>120</width>
+       <height>120</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="page_2"/>
   </widget>
@@ -158,33 +210,9 @@
    <property name="geometry">
     <rect>
      <x>420</x>
-     <y>655</y>
+     <y>637</y>
      <width>140</width>
-     <height>145</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial Black</family>
-     <pointsize>20</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="check_label_down">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>655</y>
-     <width>140</width>
-     <height>145</height>
+     <height>180</height>
     </rect>
    </property>
    <property name="font">
@@ -206,9 +234,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>655</y>
+     <y>637</y>
      <width>140</width>
-     <height>145</height>
+     <height>180</height>
     </rect>
    </property>
    <property name="font">
@@ -230,9 +258,9 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>655</y>
+     <y>637</y>
      <width>140</width>
-     <height>145</height>
+     <height>180</height>
     </rect>
    </property>
    <property name="font">
@@ -245,6 +273,30 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="check_label_down">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>637</y>
+     <width>140</width>
+     <height>180</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial Black</family>
+     <pointsize>20</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

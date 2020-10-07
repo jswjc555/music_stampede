@@ -23,7 +23,7 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w) :
     player=new QMediaPlayer(this);
     player->setMedia(QUrl("qrc:/lion.mp3"));
     player->setVolume(100);
-    sencond=sump[n];
+    sencond=sump[n]/200;
 
 
     ui->perfect_lable->setText(QString::number(0));
@@ -37,6 +37,16 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w) :
     ui->up_gif->setScaledContents(true);
     ui->down_gif->setScaledContents(true);
     ui->right_gif->setScaledContents(true);
+    ui->down_cover->setScaledContents(true);
+    ui->up_dis->setScaledContents(true);
+    ui->left_dis->setScaledContents(true);
+    ui->right_dis->setScaledContents(true);
+    ui->down_dis->setScaledContents(true);
+    ui->check_label_left->setScaledContents(true);
+    ui->check_label_up->setScaledContents(true);
+    ui->check_label_down->setScaledContents(true);
+    ui->check_label_right->setScaledContents(true);
+
     gif_quiet =new QImage;
     gif_quiet->load(":/image/none.png");
     ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
@@ -44,14 +54,22 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w) :
     ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
     ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
 
-    ui->check_label_left->setText("left");
-    ui->check_label_left->setStyleSheet("QLabel{background-color:rgb(92,141,128);}");
-    ui->check_label_up->setText("up");
-    ui->check_label_up->setStyleSheet("QLabel{background-color:rgb(92,141,128);}");
-    ui->check_label_down->setText("down");
-    ui->check_label_down->setStyleSheet("QLabel{background-color:rgb(92,141,128);}");
-    ui->check_label_right->setText("right");
-    ui->check_label_right->setStyleSheet("QLabel{background-color:rgb(92,141,128);}");
+    QImage *long_key = new QImage;
+    long_key->load(":/image/long_key.png");
+    ui->down_cover->setPixmap(QPixmap::fromImage(*long_key));
+    ui->down_cover->raise();
+
+    QImage *short_key = new QImage;
+    short_key->load(":/image/short_key.png");
+    ui->check_label_left->setPixmap(QPixmap::fromImage(*short_key));
+    ui->check_label_up->setPixmap(QPixmap::fromImage(*short_key));
+    ui->check_label_down->setPixmap(QPixmap::fromImage(*short_key));
+    ui->check_label_right->setPixmap(QPixmap::fromImage(*short_key));
+    ui->check_label_left->setVisible(false);
+    ui->check_label_up->setVisible(false);
+    ui->check_label_down->setVisible(false);
+    ui->check_label_right->setVisible(false);
+
     QImage *main_back=new QImage; //新建一个image对象
     ui->main_back->setScaledContents(true);//自适应大小
     main_back->load(":/image/main_back.png"); //将图像资源载入对象img，注意路径，可点进图片右键复制路径
@@ -118,54 +136,84 @@ void MyMusic::deleteit()
             }
         }
 }
-
 void MyMusic::deletegif_left()
 {
     for(int i=0;i<lnum.size();i++)
-        if(global_i[i][0] == 1){
-            lnum.at(i)->hide();
-            lnum.removeAt(i);//消除方块
-            global_i[i][0] = 0;
-            cout;
+        if(lnum.at(i)->position==0)
+        {
+            if(lnum.at(i)->isclicked){
+                lnum.at(i)->hide();
+                lnum.removeAt(i);//消除方块
+                ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                break;
+            }
         }
-    ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
 
 }
 
 void MyMusic::deletegif_up()
 {
     for(int i=0;i<lnum.size();i++)
-        if(global_i[i][0] == 1){
-            lnum.at(i)->hide();
-            lnum.removeAt(i);//消除方块
-            global_i[i][0] = 0;
-            cout;
+        if(lnum.at(i)->position==1)
+        {
+
+            if(lnum.at(i)->isclicked){
+                lnum.at(i)->hide();
+                lnum.removeAt(i);//消除方块
+                ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                //ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+                break;
+            }
         }
-    ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+}
+
+
+void MyMusic::deletegif_down()
+{
+    for(int i=0;i<lnum.size();i++)
+        if(lnum.at(i)->position==2)
+        {
+            if(lnum.at(i)->isclicked){
+                lnum.at(i)->hide();
+                lnum.removeAt(i);//消除方块
+                ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                break;
+            }
+        }
+}
+
+void MyMusic::up_quiet()
+{
+    ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+}
+
+void MyMusic::left_quiet()
+{
+    ui->left_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+}
+
+void MyMusic::down_quiet()
+{
+    ui->down_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+}
+
+void MyMusic::right_quiet()
+{
+    ui->right_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
 }
 
 void MyMusic::deletegif_right()
 {
     for(int i=0;i<lnum.size();i++)
-        if(global_i[i][0] == 1){
-            lnum.at(i)->hide();
-            lnum.removeAt(i);//消除方块
-            global_i[i][0] = 0;
-            cout;
+        if(lnum.at(i)->position==3)
+        {
+            if(lnum.at(i)->isclicked){
+                lnum.at(i)->hide();
+                lnum.removeAt(i);//消除方块
+                ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                break;
+            }
         }
-     ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-}
-
-void MyMusic::deletegif_down()
-{
-    for(int i=0;i<lnum.size();i++)
-        if(global_i[i][0] == 1){
-            lnum.at(i)->hide();
-            lnum.removeAt(i);//消除方块
-            global_i[i][0] = 0;
-            cout;
-        }
-    ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
 }
 
 int MyMusic::cha(int i)
@@ -183,7 +231,6 @@ void MyMusic::start()
     player->play();
 }
 
-
 void MyMusic::timerEvent(QTimerEvent *event)
 {
     if(event->timerId() == tm_lcd){
@@ -198,52 +245,154 @@ void MyMusic::timerEvent(QTimerEvent *event)
     }
     else if (event->timerId() == tm_label) {
         int r=sumtime.remainingTime();
-        if(r<(sencond-already)*1000+5&&r>(sencond-already)*1000-5)
+        if(r<(sump[n]-sump[nn])*5+5&&r>(sump[n]-sump[nn])*5-5)
         {
-            int y=rand(15,1);//获得一个1-15的随机数
+            int y=rand(24,1);//获得一个1-15的随机数
             nn++;
             already+=cha(nn);
             if(nn>n) return;
             int k= cha(nn);
-            if(k>=5){
+            if(k>=1000){
                 MyLabel *p=new MyLabel(this,rand(),normal);//islong
                 lnum.append(p);
                 if(nn>n) return;
             }
             else{
-                for(int j=0;j<4;j++){
-                    if(y&(1<<j)){//二进制的方法判断哪些位置应该出现方块
-                        MyLabel *p = 0;
-                        if(y==1||y==2||y==8||y==4){
-                            p=new MyLabel(this,j,normal);//canmove
-                        }
-                        else
-                            if(combo>=10){
-                                p=new MyLabel(this,j,normal);//disappear
-                            }//连击超过10次生成可消失方块
 
-                            else{
-                                  p=new MyLabel(this,j,normal);
-                            }
-                        lnum.append(p);
-                    }
+                MyLabel *p=0;
+                               if(y>=1 && y<=3){    //0
+                                    if(combo>=10)//连击超过10次生成可消失方块
+                                         p=new MyLabel(this,0,disappear);
+                                    else
+                                         p=new MyLabel(this,0,normal);
+                                    lnum.append(p);
+                                   }
+                               if(y>=4 && y<=6){    //1
+                                     if(combo>=10)//连击超过10次生成可消失方块
+                                         p=new MyLabel(this,1,disappear);
+                                    else
+                                         p=new MyLabel(this,1,normal);
+                                    lnum.append(p);
+                                   }
+                               if(y>=7 && y<=9){    //2
+                                    if(combo>=10)//连击超过10次生成可消失方块
+                                   p=new MyLabel(this,2,disappear);
+                               else
+                                   p=new MyLabel(this,2,normal);
+                               lnum.append(p);
+                                   }
+                               if(y>=10 && y<=12){  //3
+                                    if(combo>=10)//连击超过10次生成可消失方块
+                                   p=new MyLabel(this,3,disappear);
+                               else
+                                   p=new MyLabel(this,3,normal);
+                               lnum.append(p);
+                                   }
+                               if(y>=13 && y<=14){  //0.1
+                                    if(combo>=10)//连击超过10次生成可消失方块
+                                   {p=new MyLabel(this,0,disappear);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,1,disappear);}
+                               else
+                                   {p=new MyLabel(this,0,normal);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,1,normal);}
+                               lnum.append(p);
+                                   }
+                               if(y>=15 && y<=16){  //0.2
+                                    if(combo>=10)//连击超过10次生成可消失方块
+                                   {p=new MyLabel(this,0,disappear);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,2,disappear);}
+                               else
+                                   {p=new MyLabel(this,0,normal);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,2,normal);}
+                               lnum.append(p);
+                                   }
+                               if(y>=17 && y<=18){  //0.3
+                                    if(combo>=10)//连击超过10次生成可消失方块
+                                   {p=new MyLabel(this,0,disappear);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,3,disappear);}
+                               else
+                                   {p=new MyLabel(this,0,normal);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,3,normal);}
+                               lnum.append(p);
+                                   }
+                               if(y>=19 && y<=20){  //1.2
+                                    if(combo>=10)//连击超过10次生成可消失方块
+                                   {p=new MyLabel(this,2,disappear);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,1,disappear);}
+                               else
+                                   {p=new MyLabel(this,2,normal);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,1,normal);}
+                               lnum.append(p);
+                                   }
+                               if(y>=21 && y<=22){  //1.3
+                                    if(combo>=10)//连击超过10次生成可消失方块
+                                   {p=new MyLabel(this,3,disappear);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,1,disappear);}
+                               else
+                                   {p=new MyLabel(this,1,normal);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,3,normal);}
+                               lnum.append(p);
+                                   }
+                               if(y>=23 && y<=24){  //2.3
+                                    if(combo>=10)//连击超过10次生成可消失方块
+                                   {p=new MyLabel(this,2,disappear);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,3,disappear);}
+                               else
+                                   {p=new MyLabel(this,2,normal);
+                                        lnum.append(p);
+                                   p=new MyLabel(this,3,normal);}
+                               lnum.append(p);
+                                   }
+//                for(int j=0;j<4;j++){
+//                    if(y&(1<<j)){//二进制的方法判断哪些位置应该出现方块
+//                        MyLabel *p = 0;
+//                        if(y==1||y==2||y==8||y==4){
+//                            p=new MyLabel(this,j,normal);//canmove
+//                        }
+//                        else
+//                            if(combo>=10){
+//                                p=new MyLabel(this,j,normal);//disappear
+//                            }//连击超过10次生成可消失方块
+
+//                            else{
+//                                  p=new MyLabel(this,j,normal);
+//                            }
+//                        lnum.append(p);
+
                 }
             }
         }
         for(int i=0;i<lnum.size();i++){
-            if(global_i[i][0] == 1)
-                continue;
+            if(!lnum.at(i)->isclicked)
             lnum.at(i)->move(lnum.at(i)->position*lable_width,lnum.at(i)->gety()+SPEED);
         }
     }
-}
+
 
 void MyMusic::keyPressEvent(QKeyEvent *event)
 {
 
     result r=bad;
     if(event->key() == Qt::Key_Left){
-        ui->check_label_left->setStyleSheet("QLabel{background-color:rgb(183,210,215);}");
+        ui->check_label_left->setVisible(true);
+        left_dis = new QMovie(":/image/dis_left.gif");
+        ui->left_dis->setMovie(left_dis);
+        left_dis->start();
+        QTimer *qTimer = new QTimer(this);
+        connect(qTimer,SIGNAL(timeout()),this,SLOT(left_quiet()));
+        qTimer->setSingleShot(true);
+        qTimer->start(600);
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==0){
                 r=check(lnum.at(i));
@@ -267,7 +416,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     }
                     dis = new QMovie(":/image/dis.gif");
                     lnum.at(i)->setMovie(dis);
-                    ui->disappear_gif->setMovie(dis);
                     dis->start();
                     QTimer *pTimer = new QTimer(this);
                     global_i[i][0] = 1;
@@ -282,7 +430,14 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
         }
     }
     else if (event->key() == Qt::Key_Up) {
-        ui->check_label_up->setStyleSheet("QLabel{background-color:rgb(183,210,215);}");
+        ui->check_label_up->setVisible(true);
+        up_dis = new QMovie(":/image/dis_up.gif");
+        ui->up_dis->setMovie(up_dis);
+        up_dis->start();
+        QTimer *qTimer = new QTimer(this);
+        connect(qTimer,SIGNAL(timeout()),this,SLOT(up_quiet()));
+        qTimer->setSingleShot(true);
+        qTimer->start(600);
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==1){
                 r=check(lnum.at(i));
@@ -294,6 +449,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                 else combo=0;
                 if(lnum.at(i)->mytype!=islong&&(r == perfect||r == good) )
                 {
+
                     if(r == perfect){
                         pingjia = new QMovie(":/image/perfect.gif");
                         ui->up_gif->setMovie(pingjia);
@@ -306,7 +462,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     }
                     dis = new QMovie(":/image/dis.gif");
                     lnum.at(i)->setMovie(dis);
-                    ui->disappear_gif->setMovie(dis);
                     dis->start();
                     QTimer *pTimer = new QTimer(this);
                     global_i[i][0] = 1;
@@ -321,7 +476,14 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
         }
     }
     else if (event->key() == Qt::Key_Down) {
-        ui->check_label_down->setStyleSheet("QLabel{background-color:rgb(183,210,215);}");
+        ui->check_label_down->setVisible(true);
+        down_dis = new QMovie(":/image/dis_down.gif");
+        ui->down_dis->setMovie(down_dis);
+        down_dis->start();
+        QTimer *qTimer = new QTimer(this);
+        connect(qTimer,SIGNAL(timeout()),this,SLOT(down_quiet()));
+        qTimer->setSingleShot(true);
+        qTimer->start(600);
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==2){
                 r=check(lnum.at(i));
@@ -345,7 +507,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     }
                     dis = new QMovie(":/image/dis.gif");
                     lnum.at(i)->setMovie(dis);
-                    ui->disappear_gif->setMovie(dis);
                     dis->start();
                     QTimer *pTimer = new QTimer(this);
                     global_i[i][0] = 1;
@@ -360,7 +521,14 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
         }
     }
     else if (event->key() == Qt::Key_Right) {
-        ui->check_label_right->setStyleSheet("QLabel{background-color:rgb(183,210,215);}");
+       ui->check_label_right->setVisible(true);
+       right_dis = new QMovie(":/image/dis_right.gif");
+       ui->right_dis->setMovie(right_dis);
+       right_dis->start();
+       QTimer *qTimer = new QTimer(this);
+       connect(qTimer,SIGNAL(timeout()),this,SLOT(right_quiet()));
+       qTimer->setSingleShot(true);
+       qTimer->start(600);
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==3){
                 r=check(lnum.at(i));
@@ -385,7 +553,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
 
                     dis = new QMovie(":/image/dis.gif");
                     lnum.at(i)->setMovie(dis);
-                    ui->disappear_gif->setMovie(dis);
                     dis->start();
                     QTimer *pTimer = new QTimer(this);
                     global_i[i][0] = 1;
@@ -427,16 +594,18 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
 void MyMusic::keyReleaseEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Left){
-         ui->check_label_left->setStyleSheet("QLabel{background-color:rgb(92,141,128);}");
+        ui->check_label_left->setVisible(false);
+
     }
     else if (event->key() == Qt::Key_Up) {
-        ui->check_label_up->setStyleSheet("QLabel{background-color:rgb(92,141,128);}");
+        ui->check_label_up->setVisible(false);
+
     }
     else if (event->key() == Qt::Key_Down) {
-        ui->check_label_down->setStyleSheet("QLabel{background-color:rgb(92,141,128);}");
+        ui->check_label_down->setVisible(false);
     }
     else if (event->key() == Qt::Key_Right) {
-        ui->check_label_right->setStyleSheet("QLabel{background-color:rgb(92,141,128);}");
+        ui->check_label_right->setVisible(false);
     }
 }
 
