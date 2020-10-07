@@ -1,0 +1,13 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\mylabel.o
+./release\mymusic.o
+./release\diffmusic.o
+./release\qrc_music.o
+./release\qrc_image.o
+./release\moc_mainwindow.o
+./release\moc_mylabel.o
+./release\moc_mymusic.o
+./release\moc_diffmusic.o
+);
