@@ -41,8 +41,8 @@ public:
     int combo=0;//连击
     QTimer sumtime;
     QTimer *dis_gif;
-//    QTimer showtime;//perfect good bad 弹窗展示时间
     QList<MyLabel*>lnum;
+    QList<MyLabel*>flnum;
     int global_i[50][1];//全局i，用于判断消失的砖块的传参
 
     explicit MyMusic(QWidget *parent,QWidget *w);

@@ -251,14 +251,7 @@ void MyMusic::timerEvent(QTimerEvent *event)
             nn++;
             already+=cha(nn);
             if(nn>n) return;
-            int k= cha(nn);
-            if(k>=1000){
-                MyLabel *p=new MyLabel(this,rand(),normal);//islong
-                lnum.append(p);
-                if(nn>n) return;
-            }
             else{
-
                 MyLabel *p=0;
                                if(y>=1 && y<=3){    //0
                                     if(combo>=10)//连击超过10次生成可消失方块
@@ -372,13 +365,31 @@ void MyMusic::timerEvent(QTimerEvent *event)
 
                 }
             }
-        }
-        for(int i=0;i<lnum.size();i++){
-            if(!lnum.at(i)->isclicked)
-            lnum.at(i)->move(lnum.at(i)->position*lable_width,lnum.at(i)->gety()+SPEED);
-        }
+        else if((r%5000)<=5){
+        if(combo>=10)
+        {
+
+                int y=rand(15,1);//获得一个1-15的随机数
+                for(int j=0;j<4;j++){
+                    if(y&(1<<j)){//二进制的方法判断哪些位置应该出现方块
+                        MyLabel*p=new MyLabel(this,j,isfalse);
+                        flnum.append(p);
+                    }
+                }
+            }
     }
 
+    for(int i=0;i<lnum.size();i++){
+        if(!lnum.at(i)->isclicked)
+        lnum.at(i)->move(lnum.at(i)->position*lable_width,lnum.at(i)->gety()+lnum.at(i)->speed);
+    }
+    for(int i=0;i<flnum.size();i++){
+        if(!flnum.at(i)->isclicked)
+        flnum.at(i)->move(flnum.at(i)->position*lable_width,flnum.at(i)->gety()+flnum.at(i)->speed);
+    }
+
+    }
+}
 
 void MyMusic::keyPressEvent(QKeyEvent *event)
 {
@@ -402,7 +413,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     lnum.at(i)->isclicked=1;
                 }//增加连击次数
                 else combo=0;
-                if(lnum.at(i)->mytype!=islong&&(r == perfect||r == good) )
+                if(r!=bad )
                 {
                     if(r == perfect){
                         pingjia = new QMovie(":/image/perfect.gif");
@@ -422,8 +433,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_left()));
                     pTimer->setSingleShot(true);
                     pTimer->start(600);
-//                    lnum.at(i)->hide();
-//                    lnum.removeAt(i);//消除方块
                 }
                 break;
             }
@@ -447,7 +456,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     lnum.at(i)->isclicked=1;
                 }
                 else combo=0;
-                if(lnum.at(i)->mytype!=islong&&(r == perfect||r == good) )
+                if(r!=bad )
                 {
 
                     if(r == perfect){
@@ -468,8 +477,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_up()));
                     pTimer->setSingleShot(true);
                     pTimer->start(600);
-//                    lnum.at(i)->hide();
-//                    lnum.removeAt(i);//消除方块
                 }
                 break;
             }
@@ -493,7 +500,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     lnum.at(i)->isclicked=1;
                 }
                 else combo=0;
-                if(lnum.at(i)->mytype!=islong&&(r == perfect||r == good) )
+                if(r!=bad )
                 {
                     if(r == perfect){
                         pingjia = new QMovie(":/image/perfect.gif");
@@ -513,8 +520,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_down()));
                     pTimer->setSingleShot(true);
                     pTimer->start(600);
-//                    lnum.at(i)->hide();
-//                    lnum.removeAt(i);//消除方块
                 }
                 break;
             }
@@ -538,7 +543,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     lnum.at(i)->isclicked=1;
                 }
                 else combo=0;
-                if(lnum.at(i)->mytype!=islong&&(r == perfect||r == good) )
+                if(r!=bad )
                 {
                     if(r == perfect){
                         pingjia = new QMovie(":/image/perfect.gif");
@@ -559,8 +564,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_right()));
                     pTimer->setSingleShot(true);
                     pTimer->start(600);
-//                    lnum.at(i)->hide();
-//                    lnum.removeAt(i);//消除方块
                 }
                 break;
             }
@@ -569,27 +572,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     else return;
     score+=int(r)*100;
     ui->perfect_lable->setText(QString::number(score));
-    //Perfect Good Bad 弹出代码
-//    QString re;
-//    switch (int(r)) {
-//    case 0:
-//        re="Bad!!!";
-//        break;
-//    case 1:
-//        re="Good!!!";
-//        break;
-//    default:
-//        re="Perfect!!!";
-//        break;
-//    }
-//    if(r==bad)
-//    ui->showre->setText(re);
-//    else
-//        ui->showre->setText(re+QString::number(combo));
-//    showtime.start(700);
-//    connect(&showtime,&QTimer::timeout,this,[&](){
-//        ui->showre->setText("");
-//    });
 }
 void MyMusic::keyReleaseEvent(QKeyEvent *event)
 {

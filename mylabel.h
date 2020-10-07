@@ -15,7 +15,7 @@
 #define  lable_high  140
 #define RAND QTime time1= QTime::currentTime();\
 qsrand(time1.msec()*90000000000+time1.second());
-enum type{disappear,canmove,islong,normal};
+enum type{disappear,canmove,isfalse,normal};
 enum result{bad,good,perfect};
 class MyLabel : public QLabel
 {
@@ -33,6 +33,7 @@ public:
     int position;
     type mytype;
     bool isclicked=0;
+    int speed=2;
     void moveEvent(QMoveEvent*);
 signals:
      void deletethis();

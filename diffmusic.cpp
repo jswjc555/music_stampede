@@ -132,12 +132,6 @@ void DiffMusic::timerEvent(QTimerEvent *event)
             nn++;
             already+=cha(nn);
             if(nn>n) return;
-            int k= cha(nn);
-            if(k>=5){
-                MyLabel *p=new MyLabel(this,rand(),islong);
-                lnum.append(p);
-                if(nn>n) return;
-            }
             else{
                 for(int j=0;j<4;j++){
                     if(y&(1<<j)){//二进制的方法判断哪些位置应该出现方块
@@ -181,11 +175,8 @@ void DiffMusic::keyPressEvent(QKeyEvent *event)
                     combo=0;
                     ui->HD->setValue(ui->HD->value()-10);
                 }
-                if(lnum.at(i)->mytype!=islong)
-                {
                     lnum.at(i)->hide();
                     lnum.removeAt(i);//消除方块
-                }
                 break;
             }
         }
@@ -210,11 +201,8 @@ void DiffMusic::keyPressEvent(QKeyEvent *event)
                     combo=0;
                     ui->HD->setValue(ui->HD->value()-10);
                 }
-                if(lnum.at(i)->mytype!=islong)
-                {
                     lnum.at(i)->hide();
                     lnum.removeAt(i);//消除方块
-                }
                 break;
             }
         }
@@ -239,11 +227,8 @@ void DiffMusic::keyPressEvent(QKeyEvent *event)
                     combo=0;
                     ui->HD->setValue(ui->HD->value()-10);
                 }
-                if(lnum.at(i)->mytype!=islong)
-                {
                     lnum.at(i)->hide();
                     lnum.removeAt(i);//消除方块
-                }
                 break;
             }
         }
@@ -268,11 +253,8 @@ void DiffMusic::keyPressEvent(QKeyEvent *event)
                     combo=0;
                     ui->HD->setValue(ui->HD->value()-10);
                 }
-                if(lnum.at(i)->mytype!=islong)
-                {
                     lnum.at(i)->hide();
                     lnum.removeAt(i);//消除方块
-                }
                 break;
             }
         }

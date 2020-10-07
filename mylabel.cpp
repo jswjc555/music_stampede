@@ -2,11 +2,7 @@
 QStringList MyLabel::path(":/image/zhuan.png");
 MyLabel::MyLabel(QWidget *parent, int position, type mytype):QLabel(parent),position(position),mytype(mytype)
 {
-    if(mytype==islong)
-        resize(lable_width,lable_high*8);
-    else
         resize(lable_width,lable_high);
-
         pix.load(path[0]);
         setPixmap(pix);
     //200-height()+100
@@ -34,24 +30,32 @@ int MyLabel::gety()
 
 void MyLabel::moveEvent(QMoveEvent *)
 {
-    if(gety()>=DEEP){
-        hide();
-        emit deletethis();
-    }
-    if(this->mytype==disappear){
-        if(gety()>=DEEP-300) {
-           setPixmap(pix);
-            return;
+        if(gety()>=DEEP){
+            hide();
+            emit deletethis();
         }
-        int i=rand(1,0);
-        if(gety()>300+50*i) {setPixmap(QPixmap(":/image/none.png"));}
-    }
-    else if(mytype==canmove){
-        if(gety()>=DEEP-300) return;
-        int i=position;
-        while (1) {
-            position=rand(4,0);
-            if(position!=i) break;
+        if(this->mytype==disappear){
+            if(gety()>=490-150) {
+               setPixmap(pix);
+                return;
+            }
+            int i=rand(1,0);
+            if(gety()>50+50*i) {setPixmap(QPixmap(":/imagene.png"));}
         }
-    }
+        else if(mytype==canmove){
+            if(gety()>=490-150) return;
+            int i=position;
+            while (1) {
+                position=rand(4,0);
+                if(position!=i) break;
+            }
+        }
+        else if(mytype==isfalse){
+            if(gety()>=100*rand(2,3)){
+                if(speed>0)speed=-2;
+                if(gety()<0){
+                    hide();
+                }
+            }
+        }
 }
