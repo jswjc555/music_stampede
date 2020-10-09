@@ -3,8 +3,8 @@
 #define cout qDebug() << "{" << __FILE__ << ":" << __LINE__ << "}"
 
 
-MyMusic::MyMusic(QWidget *parent, QWidget *w) :
-    QWidget(parent),w(w),
+MyMusic::MyMusic(QWidget *parent, QWidget *w, gametype type) :
+    QWidget(parent),w(w),type(type),
     ui(new Ui::MyMusic)
 {
     ui->setupUi(this);
@@ -258,7 +258,6 @@ void MyMusic::start()
     sumtime.start();
     player->play();
 }
-
 void MyMusic::timerEvent(QTimerEvent *event)
 {
     if(event->timerId() == tm_lcd){
@@ -280,122 +279,123 @@ void MyMusic::timerEvent(QTimerEvent *event)
             already+=cha(nn);
             if(nn>n) return;
             else{
-                MyLabel *p=0;
-                               if(y>=1 && y<=3){    //0
-                                    if(combo>=10)//连击超过10次生成可消失方块
-                                         p=new MyLabel(this,0,disappear);
-                                    else
-                                         p=new MyLabel(this,0,normal);
-                                    lnum.append(p);
-                                   }
-                               if(y>=4 && y<=6){    //1
-                                     if(combo>=10)//连击超过10次生成可消失方块
-                                         p=new MyLabel(this,1,disappear);
-                                    else
-                                         p=new MyLabel(this,1,normal);
-                                    lnum.append(p);
-                                   }
-                               if(y>=7 && y<=9){    //2
-                                    if(combo>=10)//连击超过10次生成可消失方块
-                                   p=new MyLabel(this,2,disappear);
-                               else
-                                   p=new MyLabel(this,2,normal);
-                               lnum.append(p);
-                                   }
-                               if(y>=10 && y<=12){  //3
-                                    if(combo>=10)//连击超过10次生成可消失方块
-                                   p=new MyLabel(this,3,disappear);
-                               else
-                                   p=new MyLabel(this,3,normal);
-                               lnum.append(p);
-                                   }
-                               if(y>=13 && y<=14){  //0.1
-                                    if(combo>=10)//连击超过10次生成可消失方块
-                                   {p=new MyLabel(this,0,disappear);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,1,disappear);}
-                               else
-                                   {p=new MyLabel(this,0,normal);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,1,normal);}
-                               lnum.append(p);
-                                   }
-                               if(y>=15 && y<=16){  //0.2
-                                    if(combo>=10)//连击超过10次生成可消失方块
-                                   {p=new MyLabel(this,0,disappear);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,2,disappear);}
-                               else
-                                   {p=new MyLabel(this,0,normal);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,2,normal);}
-                               lnum.append(p);
-                                   }
-                               if(y>=17 && y<=18){  //0.3
-                                    if(combo>=10)//连击超过10次生成可消失方块
-                                   {p=new MyLabel(this,0,disappear);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,3,disappear);}
-                               else
-                                   {p=new MyLabel(this,0,normal);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,3,normal);}
-                               lnum.append(p);
-                                   }
-                               if(y>=19 && y<=20){  //1.2
-                                    if(combo>=10)//连击超过10次生成可消失方块
-                                   {p=new MyLabel(this,2,disappear);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,1,disappear);}
-                               else
-                                   {p=new MyLabel(this,2,normal);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,1,normal);}
-                               lnum.append(p);
-                                   }
-                               if(y>=21 && y<=22){  //1.3
-                                    if(combo>=10)//连击超过10次生成可消失方块
-                                   {p=new MyLabel(this,3,disappear);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,1,disappear);}
-                               else
-                                   {p=new MyLabel(this,1,normal);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,3,normal);}
-                               lnum.append(p);
-                                   }
-                               if(y>=23 && y<=24){  //2.3
-                                    if(combo>=10)//连击超过10次生成可消失方块
-                                   {p=new MyLabel(this,2,disappear);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,3,disappear);}
-                               else
-                                   {p=new MyLabel(this,2,normal);
-                                        lnum.append(p);
-                                   p=new MyLabel(this,3,normal);}
-                               lnum.append(p);
-                                   }
-//                for(int j=0;j<4;j++){
-//                    if(y&(1<<j)){//二进制的方法判断哪些位置应该出现方块
-//                        MyLabel *p = 0;
-//                        if(y==1||y==2||y==8||y==4){
-//                            p=new MyLabel(this,j,normal);//canmove
-//                        }
-//                        else
-//                            if(combo>=10){
-//                                p=new MyLabel(this,j,normal);//disappear
-//                            }//连击超过10次生成可消失方块
-
-//                            else{
-//                                  p=new MyLabel(this,j,normal);
-//                            }
-//                        lnum.append(p);
-
+                if(type==easy)
+                {
+                    int nnn=0;
+                    for(int j=0;j<4;j++){
+                        if(y&(1<<j)){//二进制的方法判断哪些位置应该出现方块
+                            if(nnn>1) break;
+                            MyLabel*p=new MyLabel(this,j,normal);
+                            lnum.append(p);
+                            nnn++;
+                        }
+                    }
+                }
+                else
+                {
+                    MyLabel *p=0;
+                    if(y>=1 && y<=3){    //0
+                        if(combo>=10)//连击超过10次生成可消失方块
+                            p=new MyLabel(this,0,disappear);
+                        else
+                            p=new MyLabel(this,0,normal);
+                        lnum.append(p);
+                    }
+                    if(y>=4 && y<=6){    //1
+                        if(combo>=10)//连击超过10次生成可消失方块
+                            p=new MyLabel(this,1,disappear);
+                        else
+                            p=new MyLabel(this,1,normal);
+                        lnum.append(p);
+                    }
+                    if(y>=7 && y<=9){    //2
+                        if(combo>=10)//连击超过10次生成可消失方块
+                            p=new MyLabel(this,2,disappear);
+                        else
+                            p=new MyLabel(this,2,normal);
+                        lnum.append(p);
+                    }
+                    if(y>=10 && y<=12){  //3
+                        if(combo>=10)//连击超过10次生成可消失方块
+                            p=new MyLabel(this,3,disappear);
+                        else
+                            p=new MyLabel(this,3,normal);
+                        lnum.append(p);
+                    }
+                    if(y>=13 && y<=14){  //0.1
+                        if(combo>=10)//连击超过10次生成可消失方块
+                        {p=new MyLabel(this,0,disappear);
+                            lnum.append(p);
+                            p=new MyLabel(this,1,disappear);}
+                        else
+                        {p=new MyLabel(this,0,normal);
+                            lnum.append(p);
+                            p=new MyLabel(this,1,normal);}
+                        lnum.append(p);
+                    }
+                    if(y>=15 && y<=16){  //0.2
+                        if(combo>=10)//连击超过10次生成可消失方块
+                        {p=new MyLabel(this,0,disappear);
+                            lnum.append(p);
+                            p=new MyLabel(this,2,disappear);}
+                        else
+                        {p=new MyLabel(this,0,normal);
+                            lnum.append(p);
+                            p=new MyLabel(this,2,normal);}
+                        lnum.append(p);
+                    }
+                    if(y>=17 && y<=18){  //0.3
+                        if(combo>=10)//连击超过10次生成可消失方块
+                        {p=new MyLabel(this,0,disappear);
+                            lnum.append(p);
+                            p=new MyLabel(this,3,disappear);}
+                        else
+                        {p=new MyLabel(this,0,normal);
+                            lnum.append(p);
+                            p=new MyLabel(this,3,normal);}
+                        lnum.append(p);
+                    }
+                    if(y>=19 && y<=20){  //1.2
+                        if(combo>=10)//连击超过10次生成可消失方块
+                        {p=new MyLabel(this,2,disappear);
+                            lnum.append(p);
+                            p=new MyLabel(this,1,disappear);}
+                        else
+                        {p=new MyLabel(this,2,normal);
+                            lnum.append(p);
+                            p=new MyLabel(this,1,normal);}
+                        lnum.append(p);
+                    }
+                    if(y>=21 && y<=22){  //1.3
+                        if(combo>=10)//连击超过10次生成可消失方块
+                        {p=new MyLabel(this,3,disappear);
+                            lnum.append(p);
+                            p=new MyLabel(this,1,disappear);}
+                        else
+                        {p=new MyLabel(this,1,normal);
+                            lnum.append(p);
+                            p=new MyLabel(this,3,normal);}
+                        lnum.append(p);
+                    }
+                    if(y>=23 && y<=24){  //2.3
+                        if(combo>=10)//连击超过10次生成可消失方块
+                        {p=new MyLabel(this,2,disappear);
+                            lnum.append(p);
+                            p=new MyLabel(this,3,disappear);}
+                        else
+                        {p=new MyLabel(this,2,normal);
+                            lnum.append(p);
+                            p=new MyLabel(this,3,normal);}
+                        lnum.append(p);
+                    }
                 }
             }
+            }
         else if((r%5000)<=5){
-        if(combo>=10)
+        if(type==diff)
         {
+            if(combo>=10)
+            {
 
                 int y=rand(15,1);//获得一个1-15的随机数
                 for(int j=0;j<4;j++){
@@ -405,8 +405,8 @@ void MyMusic::timerEvent(QTimerEvent *event)
                     }
                 }
             }
+        }
     }
-
     for(int i=0;i<lnum.size();i++){
         if(!lnum.at(i)->isclicked)
         lnum.at(i)->move(lnum.at(i)->position*lable_width,lnum.at(i)->gety()+lnum.at(i)->speed);
@@ -416,6 +416,60 @@ void MyMusic::timerEvent(QTimerEvent *event)
         flnum.at(i)->move(flnum.at(i)->position*lable_width,flnum.at(i)->gety()+flnum.at(i)->speed);
     }
 
+    }
+    else if (event->timerId() == tm_left) {
+        for(int i=0;i<lnum.size();i++)
+            if(lnum.at(i)->position==0)
+            {
+                if(lnum.at(i)->isclicked){
+                    lnum.at(i)->hide();
+                    lnum.removeAt(i);//消除方块
+                    ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                    break;
+                }
+            }
+        killTimer(tm_left);
+    }
+    else if (event->timerId() == tm_up) {
+        for(int i=0;i<lnum.size();i++)
+            if(lnum.at(i)->position==1)
+            {
+
+                if(lnum.at(i)->isclicked){
+                    lnum.at(i)->hide();
+                    lnum.removeAt(i);//消除方块
+                    ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                    //ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+                    break;
+                }
+            }
+        killTimer(tm_up);
+    }
+    else if (event->timerId() == tm_down) {
+        for(int i=0;i<lnum.size();i++)
+            if(lnum.at(i)->position==2)
+            {
+                if(lnum.at(i)->isclicked){
+                    lnum.at(i)->hide();
+                    lnum.removeAt(i);//消除方块
+                    ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                    break;
+                }
+            }
+        killTimer(tm_down);
+    }
+    else if (event->timerId() == tm_right) {
+        for(int i=0;i<lnum.size();i++)
+            if(lnum.at(i)->position==3)
+            {
+                if(lnum.at(i)->isclicked){
+                    lnum.at(i)->hide();
+                    lnum.removeAt(i);//消除方块
+                    ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                    break;
+                }
+            }
+        killTimer(tm_right);
     }
 }
 
@@ -455,12 +509,8 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     }
                     dis = new QMovie(":/image/dis.gif");
                     lnum.at(i)->setMovie(dis);
-
                     dis->start();
-                    QTimer *pTimer = new QTimer(this);
-                    connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_left()));
-                    pTimer->setSingleShot(true);
-                    pTimer->start(600);
+                    tm_left = this->startTimer(600);
                 }
                 break;
             }
@@ -500,10 +550,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     dis = new QMovie(":/image/dis.gif");
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    QTimer *pTimer = new QTimer(this);
-                    connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_up()));
-                    pTimer->setSingleShot(true);
-                    pTimer->start(600);
+                    tm_up = startTimer(600);
                 }
                 break;
             }
@@ -542,11 +589,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     dis = new QMovie(":/image/dis.gif");
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    QTimer *pTimer = new QTimer(this);
-                    global_i[i][0] = 1;
-                    connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_down()));
-                    pTimer->setSingleShot(true);
-                    pTimer->start(600);
+                    tm_down = startTimer(600);
                 }
                 break;
             }
@@ -586,11 +629,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     dis = new QMovie(":/image/dis.gif");
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    QTimer *pTimer = new QTimer(this);
-                    global_i[i][0] = 1;
-                    connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_right()));
-                    pTimer->setSingleShot(true);
-                    pTimer->start(600);
+                    tm_right = startTimer(600);
                 }
                 break;
             }
@@ -737,6 +776,7 @@ void MyMusic::on_stop_button_clicked()
     player->stop();
     killTimer(tm_lcd);
     killTimer(tm_label);
+    qDebug()<<this->children().size();
     sumtime.stop();
     QString str;
     str += "当前连击数combo: " + QString::number(combo) + "\n" + "当前分数: " + QString::number(score) +"\n休息一下，再接再厉吧！";

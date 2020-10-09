@@ -179,7 +179,7 @@ public:
         combo_right->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         cheng_label->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         check_label_right->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
-        check_label_left->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
+        check_label_left->setText(QString());
         check_label_up->setText(QString());
         check_label_down->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
     } // retranslateUi

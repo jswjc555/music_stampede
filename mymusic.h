@@ -17,7 +17,7 @@
 
 #define play_WIDTH 850
 #define play_HIGH  800
-
+enum gametype{easy,diff};
 namespace Ui {
 class MyMusic;
 }
@@ -29,6 +29,7 @@ public:
     QWidget *w=0;
     int sencond;//总时长
     int n=0;//总卡点数
+    gametype type;
     QList<int> sump;//卡点存储
     QFile *f=0;
     QMediaPlayer *player=0;
@@ -37,6 +38,7 @@ public:
     int already=0;//已经过时长
     int tm_label;
     int tm_lcd;
+    int tm_left,tm_up,tm_down,tm_right;
     int min,sec;
     int combo=0;//连击
     QTimer sumtime;
@@ -45,7 +47,7 @@ public:
     QList<MyLabel*>flnum;
     int global_i[50][1];//全局i，用于判断消失的砖块的传参
 
-    explicit MyMusic(QWidget *parent,QWidget *w);
+    explicit MyMusic(QWidget *parent,QWidget *w,gametype type=easy);
     ~MyMusic();
     int cha(int);
     void start();
