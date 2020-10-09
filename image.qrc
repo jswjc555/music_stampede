@@ -18,5 +18,17 @@
         <file>image/dis_right.gif</file>
         <file>image/dis_left.gif</file>
         <file>image/dis_down.gif</file>
+        <file>image/normal_mode.png</file>
+        <file>image/cheng.png</file>
+        <file>image/0.png</file>
+        <file>image/1.png</file>
+        <file>image/2.png</file>
+        <file>image/3.png</file>
+        <file>image/4.png</file>
+        <file>image/5.png</file>
+        <file>image/6.png</file>
+        <file>image/7.png</file>
+        <file>image/8.png</file>
+        <file>image/9.png</file>
     </qresource>
 </RCC>

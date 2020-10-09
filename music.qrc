@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>test.txt</file>
         <file>lion.mp3</file>
+        <file>TheCrave.mp3</file>
     </qresource>
 </RCC>

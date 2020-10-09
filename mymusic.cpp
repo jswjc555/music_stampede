@@ -21,7 +21,7 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w) :
         i++;
     }
     player=new QMediaPlayer(this);
-    player->setMedia(QUrl("qrc:/lion.mp3"));
+    player->setMedia(QUrl("qrc:/TheCrave.mp3"));
     player->setVolume(100);
     sencond=sump[n]/200;
 
@@ -32,6 +32,7 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w) :
     sumtime.setInterval(sencond*1000);
     ui->lcdNumber->setDigitCount(5);
     ui->lcdNumber->setVisible(false);
+    ui->combo_image->setText("COMBO:");
 
     ui->left_gif->setScaledContents(true);
     ui->up_gif->setScaledContents(true);
@@ -46,6 +47,18 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w) :
     ui->check_label_up->setScaledContents(true);
     ui->check_label_down->setScaledContents(true);
     ui->check_label_right->setScaledContents(true);
+
+    QImage *num = new QImage;
+    ui->cheng_label->setScaledContents(true);
+    ui->combo_left->setScaledContents(true);
+    ui->combo_right->setScaledContents(true);
+    num->load(":/image/cheng.png");
+    ui->cheng_label->setPixmap(QPixmap::fromImage(*num));
+    num->load(":/image/0.png");
+    ui->combo_left->setPixmap(QPixmap::fromImage(*num));
+    ui->combo_right->setPixmap(QPixmap::fromImage(*num));
+
+
 
     gif_quiet =new QImage;
     gif_quiet->load(":/image/none.png");
@@ -78,6 +91,10 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w) :
     ui->bar_label->setScaledContents(true);
     bar->load(":/image/check_bar.png");
     ui->bar_label->setPixmap(QPixmap::fromImage(*bar));
+    QImage *mode = new QImage;
+    ui->pattern_label->setScaledContents(true);
+    mode->load(":/image/normal_mode.png");
+    ui->pattern_label->setPixmap(QPixmap::fromImage(*mode));
 
 
 
@@ -123,6 +140,17 @@ result MyMusic::check(MyLabel *y)
 bool MyMusic::israng(int n,int a, int b)
 {
     return n>=(a-b)&&n<=(a+b);
+}
+
+int MyMusic::stop_MessageBox(QString title, QString message)
+{
+    QMessageBox mymessage(QMessageBox::Information, title, message);
+    QPushButton *btnYes = mymessage.addButton(("继续"), QMessageBox::YesRole);
+    mymessage.resize(400,500);
+    mymessage.exec();
+    if ((QPushButton*)mymessage.clickedButton() == btnYes)
+            return 0;
+    return 0;
 }
 
 void MyMusic::deleteit()
@@ -427,9 +455,9 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     }
                     dis = new QMovie(":/image/dis.gif");
                     lnum.at(i)->setMovie(dis);
+
                     dis->start();
                     QTimer *pTimer = new QTimer(this);
-                    global_i[i][0] = 1;
                     connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_left()));
                     pTimer->setSingleShot(true);
                     pTimer->start(600);
@@ -473,7 +501,6 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     lnum.at(i)->setMovie(dis);
                     dis->start();
                     QTimer *pTimer = new QTimer(this);
-                    global_i[i][0] = 1;
                     connect(pTimer,SIGNAL(timeout()),this,SLOT(deletegif_up()));
                     pTimer->setSingleShot(true);
                     pTimer->start(600);
@@ -572,6 +599,118 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     else return;
     score+=int(r)*100;
     ui->perfect_lable->setText(QString::number(score));
+    QImage *numm = new QImage;
+    if (combo == 0){
+        numm->load(":/image/0.png");
+        ui->combo_left->setPixmap(QPixmap::fromImage(*numm));;
+        ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+    }
+   else{
+        int right = combo%10;
+        int left  = (combo-(combo%10))/10;
+        switch (right) {
+        case 0:{
+            numm->load(":/image/0.png");
+            ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+            case 1:{
+                numm->load(":/image/1.png");
+                ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+                break;
+            }
+        case 2:{
+            numm->load(":/image/2.png");
+            ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 3:{
+            numm->load(":/image/3.png");
+            ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 4:{
+            numm->load(":/image/4.png");
+            ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 5:{
+            numm->load(":/image/5.png");
+            ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 6:{
+            numm->load(":/image/6.png");
+            ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 7:{
+            numm->load(":/image/7.png");
+            ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 8:{
+            numm->load(":/image/8.png");
+            ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 9:{
+            numm->load(":/image/9.png");
+            ui->combo_right->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        }
+        switch (left) {
+            case 1:{
+                numm->load(":/image/1.png");
+                ui->combo_left->setPixmap(QPixmap::fromImage(*numm));
+                break;
+            }
+        case 2:{
+            numm->load(":/image/2.png");
+            ui->combo_left->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 3:{
+            numm->load(":/image/3.png");
+            ui->combo_left->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 4:{
+            numm->load(":/image/4.png");
+            ui->combo_left->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 5:{
+            numm->load(":/image/5.png");
+            ui->combo_left->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 6:{
+            numm->load(":/image/6.png");
+            ui->combo_left->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 7:{
+            numm->load(":/image/7.png");
+            ui->combo_left->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 8:{
+            numm->load(":/image/8.png");
+            ui->combo_left->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        case 9:{
+            numm->load(":/image/9.png");
+            ui->combo_left->setPixmap(QPixmap::fromImage(*numm));
+            break;
+        }
+        }
+    }
+
+
+
 }
 void MyMusic::keyReleaseEvent(QKeyEvent *event)
 {
@@ -592,3 +731,20 @@ void MyMusic::keyReleaseEvent(QKeyEvent *event)
 }
 
 
+
+void MyMusic::on_stop_button_clicked()
+{
+    player->stop();
+    killTimer(tm_lcd);
+    killTimer(tm_label);
+    sumtime.stop();
+    QString str;
+    str += "当前连击数combo: " + QString::number(combo) + "\n" + "当前分数: " + QString::number(score) +"\n休息一下，再接再厉吧！";
+    int a =stop_MessageBox("暂停",str);
+    if(a == 0){
+        player->play();
+        tm_lcd = this->startTimer(1000);
+        tm_label = this->startTimer(5);
+        sumtime.start();
+    }
+}

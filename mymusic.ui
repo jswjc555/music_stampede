@@ -27,9 +27,9 @@
      <property name="geometry">
       <rect>
        <x>610</x>
-       <y>100</y>
-       <width>181</width>
-       <height>61</height>
+       <y>490</y>
+       <width>201</width>
+       <height>91</height>
       </rect>
      </property>
      <property name="font">
@@ -50,8 +50,8 @@
     <widget class="QLCDNumber" name="lcdNumber">
      <property name="geometry">
       <rect>
-       <x>600</x>
-       <y>20</y>
+       <x>590</x>
+       <y>190</y>
        <width>181</width>
        <height>71</height>
       </rect>
@@ -201,6 +201,84 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="stop_button">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>630</y>
+       <width>91</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>暂停</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="pattern_label">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>20</y>
+       <width>121</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="combo_image">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>280</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="combo_left">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>350</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="combo_right">
+     <property name="geometry">
+      <rect>
+       <x>720</x>
+       <y>350</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="cheng_label">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>350</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
      </property>
     </widget>
    </widget>

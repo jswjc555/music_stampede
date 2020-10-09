@@ -52,6 +52,7 @@ public:
     int rand(int a=4, int b=0);
     result check(MyLabel*);
     bool israng(int, int, int);
+    int stop_MessageBox(QString title, QString message);
 protected:
     void timerEvent(QTimerEvent *);
     void keyPressEvent(QKeyEvent *);
@@ -77,6 +78,7 @@ signals:
     void gameover(int);
 private slots:
 
+    void on_stop_button_clicked();
 };
 
 

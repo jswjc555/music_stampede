@@ -16,6 +16,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QWidget>
 
@@ -39,6 +40,12 @@ public:
     QLabel *left_dis;
     QLabel *down_dis;
     QLabel *right_dis;
+    QPushButton *stop_button;
+    QLabel *pattern_label;
+    QLabel *combo_image;
+    QLabel *combo_left;
+    QLabel *combo_right;
+    QLabel *cheng_label;
     QWidget *page_2;
     QLabel *check_label_right;
     QLabel *check_label_left;
@@ -57,7 +64,7 @@ public:
         page->setObjectName(QStringLiteral("page"));
         perfect_lable = new QLabel(page);
         perfect_lable->setObjectName(QStringLiteral("perfect_lable"));
-        perfect_lable->setGeometry(QRect(610, 100, 181, 61));
+        perfect_lable->setGeometry(QRect(610, 490, 201, 91));
         QFont font;
         font.setFamily(QStringLiteral("Arial Black"));
         font.setPointSize(20);
@@ -67,7 +74,7 @@ public:
         perfect_lable->setAlignment(Qt::AlignCenter);
         lcdNumber = new QLCDNumber(page);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
-        lcdNumber->setGeometry(QRect(600, 20, 181, 71));
+        lcdNumber->setGeometry(QRect(590, 190, 181, 71));
         lcdNumber->setSegmentStyle(QLCDNumber::Flat);
         main_back = new QLabel(page);
         main_back->setObjectName(QStringLiteral("main_back"));
@@ -102,6 +109,24 @@ public:
         right_dis = new QLabel(page);
         right_dis->setObjectName(QStringLiteral("right_dis"));
         right_dis->setGeometry(QRect(424, 576, 120, 120));
+        stop_button = new QPushButton(page);
+        stop_button->setObjectName(QStringLiteral("stop_button"));
+        stop_button->setGeometry(QRect(650, 630, 91, 81));
+        pattern_label = new QLabel(page);
+        pattern_label->setObjectName(QStringLiteral("pattern_label"));
+        pattern_label->setGeometry(QRect(620, 20, 121, 111));
+        combo_image = new QLabel(page);
+        combo_image->setObjectName(QStringLiteral("combo_image"));
+        combo_image->setGeometry(QRect(590, 280, 161, 51));
+        combo_left = new QLabel(page);
+        combo_left->setObjectName(QStringLiteral("combo_left"));
+        combo_left->setGeometry(QRect(670, 350, 51, 51));
+        combo_right = new QLabel(page);
+        combo_right->setObjectName(QStringLiteral("combo_right"));
+        combo_right->setGeometry(QRect(720, 350, 51, 51));
+        cheng_label = new QLabel(page);
+        cheng_label->setObjectName(QStringLiteral("cheng_label"));
+        cheng_label->setGeometry(QRect(610, 350, 51, 51));
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName(QStringLiteral("page_2"));
@@ -147,6 +172,12 @@ public:
         left_dis->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         down_dis->setText(QString());
         right_dis->setText(QString());
+        stop_button->setText(QApplication::translate("MyMusic", "\346\232\202\345\201\234", Q_NULLPTR));
+        pattern_label->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
+        combo_image->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
+        combo_left->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
+        combo_right->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
+        cheng_label->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         check_label_right->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         check_label_left->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         check_label_up->setText(QString());
