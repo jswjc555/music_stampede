@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MyMusic_t {
-    QByteArrayData data[9];
-    char stringdata0[93];
+    QByteArrayData data[11];
+    char stringdata0[114];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,12 +39,14 @@ QT_MOC_LITERAL(4, 27, 8), // "up_quiet"
 QT_MOC_LITERAL(5, 36, 10), // "left_quiet"
 QT_MOC_LITERAL(6, 47, 10), // "down_quiet"
 QT_MOC_LITERAL(7, 58, 11), // "right_quiet"
-QT_MOC_LITERAL(8, 70, 22) // "on_stop_button_clicked"
+QT_MOC_LITERAL(8, 70, 11), // "deletemovie"
+QT_MOC_LITERAL(9, 82, 8), // "MyMovie*"
+QT_MOC_LITERAL(10, 91, 22) // "on_stop_button_clicked"
 
     },
     "MyMusic\0gameover\0\0deleteit\0up_quiet\0"
     "left_quiet\0down_quiet\0right_quiet\0"
-    "on_stop_button_clicked"
+    "deletemovie\0MyMovie*\0on_stop_button_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,7 +56,7 @@ static const uint qt_meta_data_MyMusic[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -62,15 +64,16 @@ static const uint qt_meta_data_MyMusic[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   49,    2, 0x06 /* Public */,
+       1,    1,   54,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   52,    2, 0x0a /* Public */,
-       4,    0,   53,    2, 0x0a /* Public */,
-       5,    0,   54,    2, 0x0a /* Public */,
-       6,    0,   55,    2, 0x0a /* Public */,
-       7,    0,   56,    2, 0x0a /* Public */,
-       8,    0,   57,    2, 0x08 /* Private */,
+       3,    0,   57,    2, 0x0a /* Public */,
+       4,    0,   58,    2, 0x0a /* Public */,
+       5,    0,   59,    2, 0x0a /* Public */,
+       6,    0,   60,    2, 0x0a /* Public */,
+       7,    0,   61,    2, 0x0a /* Public */,
+       8,    1,   62,    2, 0x0a /* Public */,
+      10,    0,   65,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    2,
@@ -81,6 +84,7 @@ static const uint qt_meta_data_MyMusic[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 9,    2,
     QMetaType::Void,
 
        0        // eod
@@ -98,8 +102,20 @@ void MyMusic::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 3: _t->left_quiet(); break;
         case 4: _t->down_quiet(); break;
         case 5: _t->right_quiet(); break;
-        case 6: _t->on_stop_button_clicked(); break;
+        case 6: _t->deletemovie((*reinterpret_cast< MyMovie*(*)>(_a[1]))); break;
+        case 7: _t->on_stop_button_clicked(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 6:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< MyMovie* >(); break;
+            }
+            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
@@ -139,13 +155,13 @@ int MyMusic::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        if (_id < 8)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 8;
     }
     return _id;
 }

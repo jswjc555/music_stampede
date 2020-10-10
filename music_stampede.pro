@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     mylabel.cpp \
-    mymusic.cpp
+    mymusic.cpp \
+    mymovie.cpp
 
 HEADERS += \
         mainwindow.h \
     mylabel.h \
-    mymusic.h
+    mymusic.h \
+    mymovie.h
 
 FORMS += \
         mainwindow.ui \

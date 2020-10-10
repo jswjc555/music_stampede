@@ -112,7 +112,7 @@ public:
         right_dis->setGeometry(QRect(424, 576, 120, 120));
         stop_button = new QPushButton(page);
         stop_button->setObjectName(QStringLiteral("stop_button"));
-        stop_button->setGeometry(QRect(650, 630, 91, 81));
+        stop_button->setGeometry(QRect(620, 610, 121, 121));
         pattern_label = new QLabel(page);
         pattern_label->setObjectName(QStringLiteral("pattern_label"));
         pattern_label->setGeometry(QRect(620, 20, 121, 111));
@@ -188,13 +188,13 @@ public:
         left_dis->setText(QString());
         down_dis->setText(QString());
         right_dis->setText(QString());
-        stop_button->setText(QApplication::translate("MyMusic", "\346\232\202\345\201\234", Q_NULLPTR));
+        stop_button->setText(QString());
         pattern_label->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         combo_image->setText(QApplication::translate("MyMusic", "Combo\357\274\232", Q_NULLPTR));
         combo_left->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         combo_right->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         cheng_label->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
-        lianji_image->setText(QApplication::translate("MyMusic", "\350\277\236\345\207\273\357\274\232", Q_NULLPTR));
+        lianji_image->setText(QApplication::translate("MyMusic", "\345\210\206\346\225\260\357\274\232", Q_NULLPTR));
         check_label_right->setText(QApplication::translate("MyMusic", "TextLabel", Q_NULLPTR));
         check_label_left->setText(QString());
         check_label_up->setText(QString());

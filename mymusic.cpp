@@ -9,7 +9,6 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
 {
     ui->setupUi(this);
     for(int i=0;i<50;i++)
-    global_i[i][0] = 0;//1代表被消除
     player=new QMediaPlayer(this);
     switch (music_no) {
     case 0:
@@ -79,13 +78,13 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
     ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
     up = new QImage;
-    up->load(":/image/0.png");
+    up->load(":/image/an_up.png");
     left = new QImage;
-    left->load(":/image/0.png");
+    left->load(":/image/an_left.png");
     right = new QImage;
-    right->load(":/image/0.png");
+    right->load(":/image/an_right.png");
     down = new QImage;
-    down->load(":/image/0.png");
+    down->load(":/image/an_down.png");
 
 
     long_key = new QImage;
@@ -103,6 +102,7 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     ui->check_label_up->setVisible(false);
     ui->check_label_down->setVisible(false);
     ui->check_label_right->setVisible(false);
+    ui->stop_button->setStyleSheet("QPushButton{border-image: url(:/image/stop.png)}");
 
     main_back=new QImage; //新建一个image对象
     ui->main_back->setScaledContents(true);//自适应大小
@@ -116,8 +116,13 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     ui->pattern_label->setScaledContents(true);
     if(type == diff)
         mode->load(":/image/hard_mode.png");
-    else {
+    else if(type == easy)
+    {
          mode->load(":/image/normal_mode.png");
+    }
+    else if (type == hp) {
+       ui->lianji_image->setVisible(false);
+       ui->perfect_lable->setVisible(false);
     }
     ui->pattern_label->setPixmap(QPixmap::fromImage(*mode));
 
@@ -218,6 +223,12 @@ void MyMusic::down_quiet()
 void MyMusic::right_quiet()
 {
     ui->right_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+}
+
+void MyMusic::deletemovie(MyMovie *m)
+{
+    delete m;
+    m=nullptr;
 }
 
 
@@ -395,81 +406,62 @@ void MyMusic::timerEvent(QTimerEvent *event)
     }
 
     }
-    else if (event->timerId() == tm_left) {
-        for(int i=0;i<lnum.size();i++)
-            if(lnum.at(i)->position==0)
-            {
-                if(lnum.at(i)->isclicked){
-                    lnum.at(i)->hide();
-                    lnum.removeAt(i);//消除方块
-                    ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-                    break;
-                }
-            }
-        killTimer(tm_left);
-    }
-    else if (event->timerId() == tm_up) {
-        for(int i=0;i<lnum.size();i++)
-            if(lnum.at(i)->position==1)
-            {
+//    else if (event->timerId() == tm_left) {
+//        for(int i=0;i<lnum.size();i++)
+//            if(lnum.at(i)->position==0)
+//            {
+//                if(lnum.at(i)->isclicked){
+//                    lnum.at(i)->hide();
+//                    lnum.removeAt(i);//消除方块
+//                    ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+//                    break;
+//                }
+//            }
+//        killTimer(tm_left);
+//    }
+//    else if (event->timerId() == tm_up) {
+//        for(int i=0;i<lnum.size();i++)
+//            if(lnum.at(i)->position==1)
+//            {
 
-                if(lnum.at(i)->isclicked){
-                    lnum.at(i)->hide();
-                    delete lnum[i];
-                    lnum[i]=nullptr;
-                    lnum.removeAt(i);//消除方块
-                    ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-                    //ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
-                    break;
-                }
-            }
-        killTimer(tm_up);
-    }
-    else if (event->timerId() == tm_down) {
-        for(int i=0;i<lnum.size();i++)
-            if(lnum.at(i)->position==2)
-            {
-                if(lnum.at(i)->isclicked){
-                    lnum.at(i)->hide();
-                    lnum.removeAt(i);//消除方块
-                    ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-                    break;
-                }
-            }
-        killTimer(tm_down);
-    }
-    else if (event->timerId() == tm_right) {
-        for(int i=0;i<lnum.size();i++)
-            if(lnum.at(i)->position==3)
-            {
-                if(lnum.at(i)->isclicked){
-                    lnum.at(i)->hide();
-                    lnum.removeAt(i);//消除方块
-                    ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-                    break;
-                }
-            }
-        killTimer(tm_right);
-    }
-    else if (event->timerId() == tmust_left) {
-        killTimer(tmust_left);
-       ui->left_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
-    }
-    else if (event->timerId() == tmust_up) {
-        killTimer(tmust_up);
-       ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
-
-    }
-    else if (event->timerId() == tmust_down) {
-        killTimer(tmust_down);
-       ui->down_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
-
-    }
-    else if (event->timerId() == tmust_right) {
-        killTimer(tmust_right);
-       ui->right_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
-
-    }
+//                if(lnum.at(i)->isclicked){
+//                    lnum.at(i)->hide();
+//                    delete lnum[i];
+//                    lnum[i]=nullptr;
+//                    lnum.removeAt(i);//消除方块
+//                    ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+//                    //ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+//                    break;
+//                }
+//            }
+//        killTimer(tm_up);
+//    }
+//    else if (event->timerId() == tm_down) {
+//        for(int i=0;i<lnum.size();i++)
+//            if(lnum.at(i)->position==2)
+//            {
+//                if(lnum.at(i)->isclicked){
+//                    lnum.at(i)->hide();
+//                    lnum.removeAt(i);//消除方块
+//                    ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+//                    break;
+//                }
+//            }
+//        killTimer(tm_down);
+//    }
+//    else if (event->timerId() == tm_right) {
+//        for(int i=0;i<lnum.size();i++)
+//            if(lnum.at(i)->position==3)
+//            {
+//                if(lnum.at(i)->isclicked){
+//                    lnum.at(i)->hide();
+//                    lnum.removeAt(i);//消除方块
+//                    ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+//                    break;
+//                }
+//            }
+//        killTimer(tm_right);
+//    }
 }
 
 void MyMusic::keyPressEvent(QKeyEvent *event)
@@ -481,6 +473,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
         ui->left_dis->setPixmap(QPixmap::fromImage(*left));
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==0){
+                if(lnum.at(i)->isclicked) return;
                 r=check(lnum.at(i));
                 if(r!=bad)
                 {
@@ -491,19 +484,33 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                 if(r!=bad )
                 {
                     if(r == perfect){
-                        pingjia = new QMovie(":/image/perfect.gif",QByteArray(),this);
+                        pingjia = new MyMovie(":/image/perfect.gif",QByteArray(),this);
                         ui->left_gif->setMovie(pingjia);
                         pingjia->start();
                     }
                     else if (r == good) {
-                        pingjia = new QMovie(":/image/good.gif",QByteArray(),this);
+                        pingjia = new MyMovie(":/image/good.gif",QByteArray(),this);
                         ui->left_gif->setMovie(pingjia);
                         pingjia->start();
                     }
-                    dis = new QMovie(":/image/dis.gif",QByteArray(),this);
+                    dis = new MyMovie(":/image/dis.gif",QByteArray(),this);
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    tm_left = this->startTimer(200);
+                    left_time.start(200);
+                    connect(&left_time,&QTimer::timeout,this,[&](){
+                        for(int i=0;i<lnum.size();i++)
+                            if(lnum.at(i)->position==0)
+                            {
+                                if(lnum.at(i)->isclicked){
+                                    lnum.at(i)->hide();
+                                    delete lnum[i];
+                                    lnum[i]=nullptr;
+                                    lnum.removeAt(i);//消除方块
+                                    ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                                    break;
+                                }
+                            }
+                    });
                 }
                 break;
             }
@@ -514,6 +521,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
         ui->up_dis->setPixmap(QPixmap::fromImage(*up));
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==1){
+                if(lnum.at(i)->isclicked) return;
                 r=check(lnum.at(i));
                 if(r!=bad)
                 {
@@ -525,19 +533,33 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                 {
 
                     if(r == perfect){
-                        pingjia = new QMovie(":/image/perfect.gif",QByteArray(),this);
+                        pingjia = new MyMovie(":/image/perfect.gif",QByteArray(),this);
                         ui->up_gif->setMovie(pingjia);
                         pingjia->start();
                     }
                     else if (r == good) {
-                        pingjia = new QMovie(":/image/good.gif",QByteArray(),this);
+                        pingjia = new MyMovie(":/image/good.gif",QByteArray(),this);
                         ui->up_gif->setMovie(pingjia);
                         pingjia->start();
                     }
-                    dis = new QMovie(":/image/dis.gif",QByteArray(),this);
+                    dis = new MyMovie(":/image/dis.gif",QByteArray(),this);
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    tm_up = startTimer(200);
+                    up_time.start(200);
+                    connect(&up_time,&QTimer::timeout,this,[&](){
+                        for(int i=0;i<lnum.size();i++)
+                            if(lnum.at(i)->position==1)
+                            {
+                                if(lnum.at(i)->isclicked){
+                                    lnum.at(i)->hide();
+                                    delete lnum[i];
+                                    lnum[i]=nullptr;
+                                    lnum.removeAt(i);//消除方块
+                                    ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                                    break;
+                                }
+                            }
+                    });
                 }
                 break;
             }
@@ -545,9 +567,10 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Down) {
         ui->check_label_down->setVisible(true);
-        ui->down_dis->setPixmap(QPixmap::fromImage(*left));
+        ui->down_dis->setPixmap(QPixmap::fromImage(*down));
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==2){
+                if(lnum.at(i)->isclicked) return;
                 r=check(lnum.at(i));
                 if(r!=bad)
                 {
@@ -558,19 +581,33 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                 if(r!=bad )
                 {
                     if(r == perfect){
-                        pingjia = new QMovie(":/image/perfect.gif",QByteArray(),this);
+                        pingjia = new MyMovie(":/image/perfect.gif",QByteArray(),this);
                         ui->down_gif->setMovie(pingjia);
                         pingjia->start();
                     }
                     else if (r == good) {
-                        pingjia = new QMovie(":/image/good.gif",QByteArray(),this);
+                        pingjia = new MyMovie(":/image/good.gif",QByteArray(),this);
                         ui->down_gif->setMovie(pingjia);
                         pingjia->start();
                     }
-                    dis = new QMovie(":/image/dis.gif",QByteArray(),this);
+                    dis = new MyMovie(":/image/dis.gif",QByteArray(),this);
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    tm_down = startTimer(200);
+                    down_time.start(200);
+                    connect(&down_time,&QTimer::timeout,this,[&](){
+                        for(int i=0;i<lnum.size();i++)
+                            if(lnum.at(i)->position==2)
+                            {
+                                if(lnum.at(i)->isclicked){
+                                    lnum.at(i)->hide();
+                                    delete lnum[i];
+                                    lnum[i]=nullptr;
+                                    lnum.removeAt(i);//消除方块
+                                    ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                                    break;
+                                }
+                            }
+                    });
                 }
                 break;
             }
@@ -578,9 +615,10 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Right) {
        ui->check_label_right->setVisible(true);
-       ui->right_dis->setPixmap(QPixmap::fromImage(*left));
+       ui->right_dis->setPixmap(QPixmap::fromImage(*right));
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==3){
+                if(lnum.at(i)->isclicked) return;
                 r=check(lnum.at(i));
                 if(r!=bad)
                 {
@@ -591,20 +629,34 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                 if(r!=bad )
                 {
                     if(r == perfect){
-                        pingjia = new QMovie(":/image/perfect.gif",QByteArray(),this);
+                        pingjia = new MyMovie(":/image/perfect.gif",QByteArray(),this);
                         ui->right_gif->setMovie(pingjia);
                         pingjia->start();
                     }
                     else if (r == good) {
-                        pingjia = new QMovie(":/image/good.gif",QByteArray(),this);
+                        pingjia = new MyMovie(":/image/good.gif",QByteArray(),this);
                         ui->right_gif->setMovie(pingjia);
                         pingjia->start();
                     }
 
-                    dis = new QMovie(":/image/dis.gif",QByteArray(),this);
+                    dis = new MyMovie(":/image/dis.gif",QByteArray(),this);
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    tm_right = startTimer(200);
+                    right_time.start(200);
+                    connect(&right_time,&QTimer::timeout,this,[&](){
+                        for(int i=0;i<lnum.size();i++)
+                            if(lnum.at(i)->position==3)
+                            {
+                                if(lnum.at(i)->isclicked){
+                                    lnum.at(i)->hide();
+                                    delete lnum[i];
+                                    lnum[i]=nullptr;
+                                    lnum.removeAt(i);//消除方块
+                                    ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+                                    break;
+                                }
+                            }
+                    });
                 }
                 break;
             }

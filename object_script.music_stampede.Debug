@@ -3,11 +3,11 @@ INPUT(
 ./debug\mainwindow.o
 ./debug\mylabel.o
 ./debug\mymusic.o
-./debug\diffmusic.o
-./debug\qrc_music.o
+./debug\mymovie.o
 ./debug\qrc_image.o
+./debug\qrc_music.o
 ./debug\moc_mainwindow.o
 ./debug\moc_mylabel.o
 ./debug\moc_mymusic.o
-./debug\moc_diffmusic.o
+./debug\moc_mymovie.o
 );

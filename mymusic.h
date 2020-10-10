@@ -1,6 +1,7 @@
 ﻿#ifndef MYMUSIC_H
 #define MYMUSIC_H
 
+#include"mymovie.h"
 #include"mylabel.h"
 #include <QObject>
 #include <QWidget>
@@ -17,7 +18,7 @@
 
 #define play_WIDTH 850
 #define play_HIGH  800
-enum gametype{easy,diff};
+enum gametype{easy,diff,hp};
 namespace Ui {
 class MyMusic;
 }
@@ -40,14 +41,16 @@ public:
     int tm_label;
     int tm_lcd;
     int tm_left,tm_up,tm_down,tm_right;
-    int tmust_left,tmust_up,tmust_down,tmust_right;
     int min,sec;
     int combo=0;//连击
     QTimer sumtime;
     QTimer *dis_gif;
+    QTimer left_time;
+    QTimer up_time;
+    QTimer right_time;
+    QTimer down_time;
     QList<MyLabel*>lnum;
     QList<MyLabel*>flnum;
-    int global_i[50][1];//全局i，用于判断消失的砖块的传参
 
     explicit MyMusic(QWidget *parent,QWidget *w,int music_no,gametype type=easy );
     ~MyMusic();
@@ -63,8 +66,8 @@ protected:
     void keyReleaseEvent(QKeyEvent *);
 private:
     Ui::MyMusic *ui;
-    QMovie *dis;
-    QMovie *pingjia;
+    MyMovie *dis;
+    MyMovie *pingjia;
     QMovie *up_dis,*left_dis,*down_dis,*right_dis;
     QImage *gif_quiet=nullptr;
     QImage *left=nullptr,*up=nullptr,*down=nullptr,*right=nullptr;
@@ -76,7 +79,7 @@ public slots:
     void left_quiet();
     void down_quiet();
     void right_quiet();
-
+    void deletemovie(MyMovie*);
 signals:
     void gameover(int);
 private slots:

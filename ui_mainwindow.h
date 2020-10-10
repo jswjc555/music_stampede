@@ -31,7 +31,6 @@ public:
     QPushButton *start_game;
     QLabel *movie_label;
     QPushButton *exit_game;
-    QPushButton *challenge;
     QWidget *mode_page;
     QLabel *background_mode;
     QPushButton *mode_normal_button;
@@ -39,6 +38,7 @@ public:
     QPushButton *mode_back_button;
     QLabel *music_choose;
     QPushButton *roll_music_button;
+    QPushButton *mode_hp_button;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -61,9 +61,6 @@ public:
         exit_game = new QPushButton(start_page);
         exit_game->setObjectName(QStringLiteral("exit_game"));
         exit_game->setGeometry(QRect(150, 400, 250, 50));
-        challenge = new QPushButton(start_page);
-        challenge->setObjectName(QStringLiteral("challenge"));
-        challenge->setGeometry(QRect(150, 500, 250, 50));
         stackedWidget->addWidget(start_page);
         mode_page = new QWidget();
         mode_page->setObjectName(QStringLiteral("mode_page"));
@@ -81,16 +78,23 @@ public:
         mode_back_button->setGeometry(QRect(175, 600, 175, 51));
         music_choose = new QLabel(mode_page);
         music_choose->setObjectName(QStringLiteral("music_choose"));
-        music_choose->setGeometry(QRect(360, 180, 191, 71));
+        music_choose->setGeometry(QRect(350, 420, 191, 71));
         roll_music_button = new QPushButton(mode_page);
         roll_music_button->setObjectName(QStringLiteral("roll_music_button"));
-        roll_music_button->setGeometry(QRect(430, 280, 51, 51));
+        roll_music_button->setGeometry(QRect(420, 500, 51, 51));
+        mode_hp_button = new QPushButton(mode_page);
+        mode_hp_button->setObjectName(QStringLiteral("mode_hp_button"));
+        mode_hp_button->setGeometry(QRect(170, 30, 181, 121));
+        QFont font;
+        font.setFamily(QStringLiteral("Agency FB"));
+        font.setPointSize(22);
+        mode_hp_button->setFont(font);
         stackedWidget->addWidget(mode_page);
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -102,13 +106,13 @@ public:
         start_game->setText(QString());
         movie_label->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         exit_game->setText(QString());
-        challenge->setText(QApplication::translate("MainWindow", "\346\214\221\346\210\230\346\250\241\345\274\217", Q_NULLPTR));
         background_mode->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         mode_normal_button->setText(QString());
         mode_hard_button->setText(QString());
         mode_back_button->setText(QApplication::translate("MainWindow", "\350\277\224\345\233\236", Q_NULLPTR));
         music_choose->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         roll_music_button->setText(QApplication::translate("MainWindow", "roll", Q_NULLPTR));
+        mode_hp_button->setText(QApplication::translate("MainWindow", "HP", Q_NULLPTR));
     } // retranslateUi
 
 };

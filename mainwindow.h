@@ -35,6 +35,10 @@ private slots:
 
     void on_roll_music_button_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_mode_hp_button_clicked();
+
 public slots:
     void GameOver(int);
 private:

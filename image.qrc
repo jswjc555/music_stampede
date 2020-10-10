@@ -31,5 +31,10 @@
         <file>image/9.png</file>
         <file>image/hard_mode.png</file>
         <file>image/dis.gif</file>
+        <file>image/an_down.png</file>
+        <file>image/an_left.png</file>
+        <file>image/an_right.png</file>
+        <file>image/an_up.png</file>
+        <file>image/stop.png</file>
     </qresource>
 </RCC>

@@ -41,14 +41,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_start_game_clicked()
 {
-//    dmusic=new DiffMusic(0,this);
-//    dmusic->show();
-//    dmusic->start();
-
-//        music=new MyMusic(0,this);
-//        music->show();
-//        music->start();
-//        this->close();
     QMovie *background = new QMovie(":/image/background.gif");//添加背景
     ui->background_mode->setMovie(background);
     background->start();
@@ -64,12 +56,7 @@ void MainWindow::GameOver(int n)
 //        delete dmusic;
 //        dmusic=0;
     }
-//    if(dmusic==0)
-//    {
-//        QMessageBox::information(NULL,"游戏结束","分数为"+QString::number(n));
-//        delete music;
-//        music=0;
-//    }
+
 
 }
 
@@ -121,4 +108,17 @@ void MainWindow::on_roll_music_button_clicked()
     }
     }
 
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
+}
+
+void MainWindow::on_mode_hp_button_clicked()
+{
+    music=new MyMusic(0,this,music_no,hp);
+           music->show();
+           music->start();
+           this->close();
 }
