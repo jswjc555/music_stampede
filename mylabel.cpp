@@ -9,7 +9,7 @@ MyLabel::MyLabel(QWidget *parent, int position, type mytype):QLabel(parent),posi
     move(position*lable_width,0);
     show();
     setScaledContents(true);
-    connect(this,SIGNAL(deletethis()),parent,SLOT(deleteit()));
+    connect(this,SIGNAL(deletethis()),this->parent(),SLOT(deleteit()));
 }
 int MyLabel::rand(int a,int b)
 {
@@ -33,6 +33,7 @@ void MyLabel::moveEvent(QMoveEvent *)
         if(gety()>=DEEP){
             hide();
             emit deletethis();
+            return;
         }
         if(this->mytype==disappear){
             if(gety()>=490-150) {

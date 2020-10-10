@@ -14,7 +14,8 @@
 #include<QPointer>
 #include<QMessageBox>
 #include <QMovie>
-
+#include <QPushButton>
+#include<QStringList>
 
 #define play_WIDTH 850
 #define play_HIGH  800
@@ -28,8 +29,6 @@ class MyMusic : public QWidget
     Q_OBJECT
 public:
     QWidget *w=0;
-    int sencond;//总时长
-    int n=0;//总卡点数
     bool ispause=0;//判断游戏是否暂停
     gametype type;
     QList<int> sump;//卡点存储
@@ -41,8 +40,12 @@ public:
     int tm_label;
     int tm_lcd;
     int tm_left,tm_up,tm_down,tm_right;
-    int min,sec;
+    int min=0,sec=0;
     int combo=0;//连击
+    int sencond;//总时长
+    int n=0;//总卡点数
+    int index=0;
+    QStringList musicpath;
     QTimer sumtime;
     QTimer *dis_gif;
     QTimer left_time;
@@ -60,6 +63,7 @@ public:
     result check(MyLabel*);
     bool israng(int, int, int);
     int stop_MessageBox(QString title, QString message);
+    void closeEvent(QCloseEvent *event);
 protected:
     void timerEvent(QTimerEvent *);
     void keyPressEvent(QKeyEvent *);
@@ -71,7 +75,7 @@ private:
     QMovie *up_dis,*left_dis,*down_dis,*right_dis;
     QImage *gif_quiet=nullptr;
     QImage *left=nullptr,*up=nullptr,*down=nullptr,*right=nullptr;
-    QImage *long_key=0 ,*short_key=0,* main_back=0,* bar=0,* mode=0;
+    QImage *long_key=0 ,*short_key=0,* main_back=0,* bar=0,* mode=0,*score_image,*combo_image;
     QImage *numm=nullptr,*num=nullptr;
 public slots:
     void deleteit();
@@ -82,9 +86,12 @@ public slots:
     void deletemovie(MyMovie*);
 signals:
     void gameover(int);
+    void back_to();
 private slots:
 
     void on_stop_button_clicked();
+    void on_end_close_clicked();
+    void on_to_main_clicked();
 };
 
 

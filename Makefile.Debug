@@ -119,41 +119,45 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_image.cpp debug\qrc_music.cpp
 debug/qrc_image.cpp: image.qrc \
 		../../5.9.2/mingw53_32/bin/rcc.exe \
-		image/an_up.png \
-		image/main_back.png \
-		image/dis_left.gif \
-		image/start_on.png \
-		image/background.gif \
-		image/normal_mode.png \
-		image/an_left.png \
-		image/long_key.png \
-		image/check_bar.png \
-		image/dis_up.gif \
-		image/none.png \
-		image/start.png \
-		image/hard_mode.png \
-		image/exit.png \
-		image/exit_on.png \
 		image/zhuan.png \
-		image/good.gif \
-		image/0.png \
-		image/cheng.png \
-		image/1.png \
-		image/2.png \
-		image/an_right.png \
-		image/3.png \
-		image/short_key.png \
-		image/4.png \
-		image/dis_right.gif \
-		image/perfect.gif \
-		image/5.png \
-		image/dis.gif \
 		image/dis_down.gif \
-		image/6.png \
-		image/7.png \
-		image/8.png \
-		image/9.png \
+		image/start.png \
+		image/3.png \
 		image/an_down.png \
+		image/none.png \
+		image/dis_up.gif \
+		image/exit.png \
+		image/check_bar.png \
+		image/main_back.png \
+		image/good.gif \
+		image/2.png \
+		image/cheng.png \
+		image/background.gif \
+		image/qg.gif \
+		image/dis.gif \
+		image/1.png \
+		image/an_right.png \
+		image/short_key.png \
+		image/long_key.png \
+		image/perfect.gif \
+		image/0.png \
+		image/dis_left.gif \
+		image/9.png \
+		image/an_left.png \
+		image/8.png \
+		image/roll.png \
+		image/score.png \
+		image/7.png \
+		image/dis_right.gif \
+		image/6.png \
+		image/normal_mode.png \
+		image/hard_mode.png \
+		image/5.png \
+		image/exit_on.png \
+		image/an_up.png \
+		image/combo.png \
+		image/start_on.png \
+		image/4.png \
 		image/stop.png
 	S:\qt\5.9.2\mingw53_32\bin\rcc.exe -name image image.qrc -o debug\qrc_image.cpp
 
@@ -328,15 +332,18 @@ debug/moc_mainwindow.cpp: mymusic.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QMessageBox \
 		../../5.9.2/mingw53_32/include/QtWidgets/qmessagebox.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qdialog.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/QPushButton \
+		../../5.9.2/mingw53_32/include/QtWidgets/qpushbutton.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		../../5.9.2/mingw53_32/include/QtGui/qicon.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QMainWindow \
 		../../5.9.2/mingw53_32/include/QtWidgets/qmainwindow.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qtabwidget.h \
-		../../5.9.2/mingw53_32/include/QtGui/qicon.h \
 		../../5.9.2/mingw53_32/include/QtCore/QDebug \
 		mainwindow.h \
 		debug/moc_predefs.h \
 		../../5.9.2/mingw53_32/bin/moc.exe
-	S:\qt\5.9.2\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IS:/qt/5.9.2/mingw53_32/mkspecs/win32-g++ -IS:/qt/Examples/music_stampede0.0 -IS:/qt/5.9.2/mingw53_32/include -IS:/qt/5.9.2/mingw53_32/include/QtMultimedia -IS:/qt/5.9.2/mingw53_32/include/QtWidgets -IS:/qt/5.9.2/mingw53_32/include/QtGui -IS:/qt/5.9.2/mingw53_32/include/QtANGLE -IS:/qt/5.9.2/mingw53_32/include/QtNetwork -IS:/qt/5.9.2/mingw53_32/include/QtCore -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward mainwindow.h -o debug\moc_mainwindow.cpp
+	S:\qt\5.9.2\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IS:/qt/5.9.2/mingw53_32/mkspecs/win32-g++ -IS:/qt/Examples/music_stampede007 -IS:/qt/5.9.2/mingw53_32/include -IS:/qt/5.9.2/mingw53_32/include/QtMultimedia -IS:/qt/5.9.2/mingw53_32/include/QtWidgets -IS:/qt/5.9.2/mingw53_32/include/QtGui -IS:/qt/5.9.2/mingw53_32/include/QtANGLE -IS:/qt/5.9.2/mingw53_32/include/QtNetwork -IS:/qt/5.9.2/mingw53_32/include/QtCore -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward mainwindow.h -o debug\moc_mainwindow.cpp
 
 debug/moc_mylabel.cpp: ../../5.9.2/mingw53_32/include/QtWidgets/QLabel \
 		../../5.9.2/mingw53_32/include/QtWidgets/qlabel.h \
@@ -453,7 +460,7 @@ debug/moc_mylabel.cpp: ../../5.9.2/mingw53_32/include/QtWidgets/QLabel \
 		mylabel.h \
 		debug/moc_predefs.h \
 		../../5.9.2/mingw53_32/bin/moc.exe
-	S:\qt\5.9.2\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IS:/qt/5.9.2/mingw53_32/mkspecs/win32-g++ -IS:/qt/Examples/music_stampede0.0 -IS:/qt/5.9.2/mingw53_32/include -IS:/qt/5.9.2/mingw53_32/include/QtMultimedia -IS:/qt/5.9.2/mingw53_32/include/QtWidgets -IS:/qt/5.9.2/mingw53_32/include/QtGui -IS:/qt/5.9.2/mingw53_32/include/QtANGLE -IS:/qt/5.9.2/mingw53_32/include/QtNetwork -IS:/qt/5.9.2/mingw53_32/include/QtCore -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward mylabel.h -o debug\moc_mylabel.cpp
+	S:\qt\5.9.2\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IS:/qt/5.9.2/mingw53_32/mkspecs/win32-g++ -IS:/qt/Examples/music_stampede007 -IS:/qt/5.9.2/mingw53_32/include -IS:/qt/5.9.2/mingw53_32/include/QtMultimedia -IS:/qt/5.9.2/mingw53_32/include/QtWidgets -IS:/qt/5.9.2/mingw53_32/include/QtGui -IS:/qt/5.9.2/mingw53_32/include/QtANGLE -IS:/qt/5.9.2/mingw53_32/include/QtNetwork -IS:/qt/5.9.2/mingw53_32/include/QtCore -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward mylabel.h -o debug\moc_mylabel.cpp
 
 debug/moc_mymusic.cpp: mymovie.h \
 		../../5.9.2/mingw53_32/include/QtGui/QMovie \
@@ -608,10 +615,14 @@ debug/moc_mymusic.cpp: mymovie.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QMessageBox \
 		../../5.9.2/mingw53_32/include/QtWidgets/qmessagebox.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qdialog.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/QPushButton \
+		../../5.9.2/mingw53_32/include/QtWidgets/qpushbutton.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		../../5.9.2/mingw53_32/include/QtGui/qicon.h \
 		mymusic.h \
 		debug/moc_predefs.h \
 		../../5.9.2/mingw53_32/bin/moc.exe
-	S:\qt\5.9.2\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IS:/qt/5.9.2/mingw53_32/mkspecs/win32-g++ -IS:/qt/Examples/music_stampede0.0 -IS:/qt/5.9.2/mingw53_32/include -IS:/qt/5.9.2/mingw53_32/include/QtMultimedia -IS:/qt/5.9.2/mingw53_32/include/QtWidgets -IS:/qt/5.9.2/mingw53_32/include/QtGui -IS:/qt/5.9.2/mingw53_32/include/QtANGLE -IS:/qt/5.9.2/mingw53_32/include/QtNetwork -IS:/qt/5.9.2/mingw53_32/include/QtCore -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward mymusic.h -o debug\moc_mymusic.cpp
+	S:\qt\5.9.2\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IS:/qt/5.9.2/mingw53_32/mkspecs/win32-g++ -IS:/qt/Examples/music_stampede007 -IS:/qt/5.9.2/mingw53_32/include -IS:/qt/5.9.2/mingw53_32/include/QtMultimedia -IS:/qt/5.9.2/mingw53_32/include/QtWidgets -IS:/qt/5.9.2/mingw53_32/include/QtGui -IS:/qt/5.9.2/mingw53_32/include/QtANGLE -IS:/qt/5.9.2/mingw53_32/include/QtNetwork -IS:/qt/5.9.2/mingw53_32/include/QtCore -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward mymusic.h -o debug\moc_mymusic.cpp
 
 debug/moc_mymovie.cpp: ../../5.9.2/mingw53_32/include/QtGui/QMovie \
 		../../5.9.2/mingw53_32/include/QtGui/qmovie.h \
@@ -703,7 +714,7 @@ debug/moc_mymovie.cpp: ../../5.9.2/mingw53_32/include/QtGui/QMovie \
 		mymovie.h \
 		debug/moc_predefs.h \
 		../../5.9.2/mingw53_32/bin/moc.exe
-	S:\qt\5.9.2\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IS:/qt/5.9.2/mingw53_32/mkspecs/win32-g++ -IS:/qt/Examples/music_stampede0.0 -IS:/qt/5.9.2/mingw53_32/include -IS:/qt/5.9.2/mingw53_32/include/QtMultimedia -IS:/qt/5.9.2/mingw53_32/include/QtWidgets -IS:/qt/5.9.2/mingw53_32/include/QtGui -IS:/qt/5.9.2/mingw53_32/include/QtANGLE -IS:/qt/5.9.2/mingw53_32/include/QtNetwork -IS:/qt/5.9.2/mingw53_32/include/QtCore -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward mymovie.h -o debug\moc_mymovie.cpp
+	S:\qt\5.9.2\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IS:/qt/5.9.2/mingw53_32/mkspecs/win32-g++ -IS:/qt/Examples/music_stampede007 -IS:/qt/5.9.2/mingw53_32/include -IS:/qt/5.9.2/mingw53_32/include/QtMultimedia -IS:/qt/5.9.2/mingw53_32/include/QtWidgets -IS:/qt/5.9.2/mingw53_32/include/QtGui -IS:/qt/5.9.2/mingw53_32/include/QtANGLE -IS:/qt/5.9.2/mingw53_32/include/QtNetwork -IS:/qt/5.9.2/mingw53_32/include/QtCore -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IS:/qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IS:/qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward mymovie.h -o debug\moc_mymovie.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -885,10 +896,13 @@ debug/main.o: main.cpp mainwindow.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QMessageBox \
 		../../5.9.2/mingw53_32/include/QtWidgets/qmessagebox.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qdialog.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/QPushButton \
+		../../5.9.2/mingw53_32/include/QtWidgets/qpushbutton.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		../../5.9.2/mingw53_32/include/QtGui/qicon.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QMainWindow \
 		../../5.9.2/mingw53_32/include/QtWidgets/qmainwindow.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qtabwidget.h \
-		../../5.9.2/mingw53_32/include/QtGui/qicon.h \
 		../../5.9.2/mingw53_32/include/QtCore/QDebug \
 		../../5.9.2/mingw53_32/include/QtWidgets/QApplication \
 		../../5.9.2/mingw53_32/include/QtWidgets/qapplication.h \
@@ -1052,10 +1066,13 @@ debug/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QMessageBox \
 		../../5.9.2/mingw53_32/include/QtWidgets/qmessagebox.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qdialog.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/QPushButton \
+		../../5.9.2/mingw53_32/include/QtWidgets/qpushbutton.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		../../5.9.2/mingw53_32/include/QtGui/qicon.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QMainWindow \
 		../../5.9.2/mingw53_32/include/QtWidgets/qmainwindow.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qtabwidget.h \
-		../../5.9.2/mingw53_32/include/QtGui/qicon.h \
 		../../5.9.2/mingw53_32/include/QtCore/QDebug \
 		ui_mainwindow.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QAction \
@@ -1084,9 +1101,6 @@ debug/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qstyle.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qtabbar.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qrubberband.h \
-		../../5.9.2/mingw53_32/include/QtWidgets/QPushButton \
-		../../5.9.2/mingw53_32/include/QtWidgets/qpushbutton.h \
-		../../5.9.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QStackedWidget \
 		../../5.9.2/mingw53_32/include/QtWidgets/qstackedwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o mainwindow.cpp
@@ -1360,10 +1374,13 @@ debug/mymusic.o: mymusic.cpp mymusic.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QMessageBox \
 		../../5.9.2/mingw53_32/include/QtWidgets/qmessagebox.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qdialog.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/QPushButton \
+		../../5.9.2/mingw53_32/include/QtWidgets/qpushbutton.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		../../5.9.2/mingw53_32/include/QtGui/qicon.h \
 		ui_mymusic.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QAction \
 		../../5.9.2/mingw53_32/include/QtWidgets/qaction.h \
-		../../5.9.2/mingw53_32/include/QtGui/qicon.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qactiongroup.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QApplication \
 		../../5.9.2/mingw53_32/include/QtWidgets/qapplication.h \
@@ -1391,9 +1408,8 @@ debug/mymusic.o: mymusic.cpp mymusic.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/qrubberband.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QLCDNumber \
 		../../5.9.2/mingw53_32/include/QtWidgets/qlcdnumber.h \
-		../../5.9.2/mingw53_32/include/QtWidgets/QPushButton \
-		../../5.9.2/mingw53_32/include/QtWidgets/qpushbutton.h \
-		../../5.9.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		../../5.9.2/mingw53_32/include/QtWidgets/QProgressBar \
+		../../5.9.2/mingw53_32/include/QtWidgets/qprogressbar.h \
 		../../5.9.2/mingw53_32/include/QtWidgets/QStackedWidget \
 		../../5.9.2/mingw53_32/include/QtWidgets/qstackedwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mymusic.o mymusic.cpp

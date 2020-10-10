@@ -9,7 +9,7 @@
 #include<QTimer>
 #include<QTime>
 #include <QtGlobal>//包含随机函数
-#define DEEP 1000
+#define DEEP 650
 #define SPEED 2
 #define lable_width   140
 #define  lable_high  140

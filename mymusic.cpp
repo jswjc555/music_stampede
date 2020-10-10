@@ -8,20 +8,88 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     ui(new Ui::MyMusic)
 {
     ui->setupUi(this);
+    ui->stackedWidget->setCurrentWidget(ui->play_page);
+    musicpath<<":/TheCrave.txt"<<"qrc:/TheCrave.mp3"<<":/ori_01.txt"<<"qrc:/ori_01.mp3";
     for(int i=0;i<50;i++)
     player=new QMediaPlayer(this);
-    switch (music_no) {
-    case 0:
+    ui->HP->hide();
+    setWindowTitle("节奏大佬");
+//    switch (music_no) {
+//    case 0:
+//    {
+//        f=new QFile(":/TheCrave.txt",this);
+//        player->setMedia(QUrl("qrc:/TheCrave.mp3"));
+//        break;
+//    }
+//    case 1:{
+//        f=new QFile(":/ori_01.txt",this);
+//        player->setMedia(QUrl("qrc:/ori_01.mp3"));
+//        break;
+//    }
+//    }
+    if(type==hp){
+        f=new QFile(musicpath[index*2],this);
+        player->setMedia(QUrl(musicpath[index*2+1]));
+        connect(&sumtime,&QTimer::timeout,this,[&](){
+            index++;
+            nn=0;combo=0;
+            if(index>2){
+                killTimer(tm_label);
+                killTimer(tm_lcd);
+                while(lnum.size()){
+                    lnum.at(0)->hide();
+                    delete lnum[0];
+                    lnum[0]=nullptr;
+                    lnum.removeAt(0);
+                }
+                while(flnum.size()){
+                    flnum.at(0)->hide();
+                    delete flnum[0];
+                    flnum[0]=nullptr;
+                    flnum.removeAt(0);
+                }
+                ui->stackedWidget->setCurrentWidget(ui->end_page);              
+            }
+            else
+            {
+                killTimer(tm_lcd);
+                killTimer(tm_label);
+                ui->stackedWidget->setCurrentWidget(ui->qiege_page);
+                MyMovie *dianbo=new MyMovie(":/image/qg.gif",QByteArray(),this);
+                ui->dianbo->setScaledContents(true);
+                ui->dianbo->setMovie(dianbo);
+                delete f;
+                f=new QFile(musicpath[index*2],this);
+                player->setMedia(QUrl(musicpath[index*2+1]));
+                if(!f->open(QIODevice::ReadOnly)){return;}
+                int i=0;
+                QString file=QString(f->readAll().data());
+                while (1) {
+                    QString s=file.section("\n",i,i);
+                    if(s=="") {n=i-1;break;}
+                    sump.append(s.toInt());
+                    i++;
+                }
+                sencond=sump[n]/200;
+                sumtime.start(sencond);
+                f->close();
+                connect(dianbo,&MyMovie::finished,this,[&](){
+                    ui->stackedWidget->setCurrentWidget(ui->play_page);
+                    tm_label=startTimer(5);
+                    tm_lcd=startTimer(1000);
+                    sumtime.start(sencond);
+                });
+                dianbo->start();
+            }
+        });
+    }
+    else
     {
-        f=new QFile(":/TheCrave.txt",this);
-        player->setMedia(QUrl("qrc:/TheCrave.mp3"));
-        break;
-    }
-    case 1:{
-        f=new QFile(":/ori_01.txt",this);
-        player->setMedia(QUrl("qrc:/ori_01.mp3"));
-        break;
-    }
+        f=new QFile(musicpath[music_no*2],this);
+        player->setMedia(QUrl(musicpath[music_no*2+1]));
+        connect(&sumtime,&QTimer::timeout,this,[&](){
+            emit gameover(score);//音乐结束时触发
+        });
     }
     if(!f->open(QIODevice::ReadOnly)){return;}
     int i=0;
@@ -32,11 +100,8 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
         sump.append(s.toInt());
         i++;
     }
-
-    player->setVolume(100);
     sencond=sump[n]/200;
-
-
+    player->setVolume(100);
     ui->perfect_lable->setText(QString::number(0));
     setFixedSize(play_WIDTH,play_HIGH);
     ui->stackedWidget->setFixedSize(play_WIDTH,play_HIGH);
@@ -91,6 +156,10 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     long_key->load(":/image/long_key.png");
     ui->down_cover->setPixmap(QPixmap::fromImage(*long_key));
     ui->down_cover->raise();
+    ui->check_label_right->raise();
+    ui->check_label_down->raise();
+    ui->check_label_left->raise();
+    ui->check_label_up->raise();
 
     short_key = new QImage;
     short_key->load(":/image/short_key.png");
@@ -112,32 +181,39 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     ui->bar_label->setScaledContents(true);
     bar->load(":/image/check_bar.png");
     ui->bar_label->setPixmap(QPixmap::fromImage(*bar));
+    score_image = new QImage;
+    ui->score_image->setScaledContents(true);
+    score_image->load(":/image/score.png");
+    ui->score_image->setPixmap(QPixmap::fromImage(*score_image));
+    combo_image = new QImage;
+    ui->combo_image->setScaledContents(true);
+    combo_image->load(":/image/combo.png");
+    ui->combo_image->setPixmap(QPixmap::fromImage(*combo_image));
     mode = new QImage;
     ui->pattern_label->setScaledContents(true);
     if(type == diff)
+    {
         mode->load(":/image/hard_mode.png");
+        min=sencond/60;
+        sec=sencond%60;
+    }
     else if(type == easy)
     {
          mode->load(":/image/normal_mode.png");
+         min=sencond/60;
+         sec=sencond%60;
     }
     else if (type == hp) {
-       ui->lianji_image->setVisible(false);
+       ui->HP->show();
+       ui->score_image->setVisible(false);
        ui->perfect_lable->setVisible(false);
     }
     ui->pattern_label->setPixmap(QPixmap::fromImage(*mode));
-
-
-
-
-
+    connect(this,SIGNAL(back_to()),w,SLOT(to_me()));
     this->grabKeyboard();
-    min=sencond/60;
-    sec=sencond%60;
     already=cha(1);
     connect(this,SIGNAL(gameover(int)),w,SLOT(GameOver(int)));
-    connect(&sumtime,&QTimer::timeout,this,[&](){
-        emit gameover(score);//音乐结束时触发
-    });
+    f->close();
 }
 
 MyMusic::~MyMusic()
@@ -191,6 +267,36 @@ int MyMusic::stop_MessageBox(QString title, QString message)
     return 0;
 }
 
+void MyMusic::closeEvent(QCloseEvent *event)
+{
+    if(ui->stackedWidget->currentIndex()==1){
+        exit(0);
+    }
+    else
+    {
+        killTimer(tm_label);
+        killTimer(tm_lcd);
+        while(lnum.size()){
+            lnum.at(0)->hide();
+            delete lnum[0];
+            lnum[0]=nullptr;
+            lnum.removeAt(0);
+        }
+        while(flnum.size()){
+            flnum.at(0)->hide();
+            delete flnum[0];
+            flnum[0]=nullptr;
+            flnum.removeAt(0);
+        }
+        ui->stackedWidget->setCurrentWidget(ui->end_page);
+        if(type==hp)
+            ui->end_label->setText("时长：\n"+QString("%1:%2").arg(min,2,10,QLatin1Char( '0' )).arg(sec,2,10,QLatin1Char( '0' )));
+        else
+            ui->end_label->setText("分数：\n"+QString::number(score));
+        event->ignore();
+    }
+}
+
 void MyMusic::deleteit()
 {
         for(int i=0;i<lnum.size();i++){
@@ -200,9 +306,10 @@ void MyMusic::deleteit()
                 delete lnum[i];
                 lnum[i]=nullptr;
                 lnum.removeAt(i);
-                return;
+                break;
             }
         }
+//        ui->HP->setValue(ui->HP->value()-10);
 }
 
 void MyMusic::up_quiet()
@@ -250,16 +357,48 @@ void MyMusic::timerEvent(QTimerEvent *event)
 {
     if(ispause) return;
     if(event->timerId() == tm_lcd){
-         ui->lcdNumber->display(QDateTime::currentDateTime().toString(QString::number(min)+":"+QString::number(sec)));
-         sec--;
-         if(sec < 0){
-             sec =59;
-             min--;
-             if(min < 0)
-                 killTimer(tm_lcd);
-         }
+        if(type==hp){
+            ui->lcdNumber->display(QString("%1:%2").arg(min,2,10,QLatin1Char( '0' )).arg(sec,2,10,QLatin1Char( '0' )));
+            sec++;
+            if(sec > 59){
+                sec =0;
+                min++;
+            }
+        }
+        else{
+            ui->lcdNumber->display(QString("%1:%2").arg(min,2,10,QLatin1Char( '0' )).arg(sec,2,10,QLatin1Char( '0' )));
+            sec--;
+            if(sec < 0){
+                sec =59;
+                min--;
+                if(min < 0)
+                {
+                    killTimer(tm_lcd);
+                    ui->stackedWidget->setCurrentWidget(ui->end_page);
+                }
+
+            }
+        }
     }
     else if (event->timerId() == tm_label) {
+        if(type==hp&&ui->HP->value()<=0)
+        {
+            killTimer(tm_label);
+            killTimer(tm_lcd);
+            while(lnum.size()){
+                lnum.at(0)->hide();
+                delete lnum[0];
+                lnum[0]=nullptr;
+                lnum.removeAt(0);
+            }
+            QMessageBox::information(NULL,"游戏结束","血量为零！！！");
+            ui->stackedWidget->setCurrentWidget(ui->end_page);
+            if(type==hp)
+                ui->end_label->setText("时长：\n"+QString("%1:%2").arg(min,2,10,QLatin1Char( '0' )).arg(sec,2,10,QLatin1Char( '0' )));
+            else
+                ui->end_label->setText("分数：\n"+QString::number(score));
+            return;
+        }
         int r=sumtime.remainingTime();
         if(r<(sump[n]-sump[nn])*5+5&&r>(sump[n]-sump[nn])*5-5)
         {
@@ -381,9 +520,9 @@ void MyMusic::timerEvent(QTimerEvent *event)
             }
             }
         else if((r%5000)<=5){
-        if(type==diff)
+        if(type!=easy)
         {
-            if(combo>=10)
+            if(combo>=5)
             {
 
                 int y=rand(15,1);//获得一个1-15的随机数
@@ -406,69 +545,17 @@ void MyMusic::timerEvent(QTimerEvent *event)
     }
 
     }
-//    else if (event->timerId() == tm_left) {
-//        for(int i=0;i<lnum.size();i++)
-//            if(lnum.at(i)->position==0)
-//            {
-//                if(lnum.at(i)->isclicked){
-//                    lnum.at(i)->hide();
-//                    lnum.removeAt(i);//消除方块
-//                    ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-//                    break;
-//                }
-//            }
-//        killTimer(tm_left);
-//    }
-//    else if (event->timerId() == tm_up) {
-//        for(int i=0;i<lnum.size();i++)
-//            if(lnum.at(i)->position==1)
-//            {
 
-//                if(lnum.at(i)->isclicked){
-//                    lnum.at(i)->hide();
-//                    delete lnum[i];
-//                    lnum[i]=nullptr;
-//                    lnum.removeAt(i);//消除方块
-//                    ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-//                    //ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
-//                    break;
-//                }
-//            }
-//        killTimer(tm_up);
-//    }
-//    else if (event->timerId() == tm_down) {
-//        for(int i=0;i<lnum.size();i++)
-//            if(lnum.at(i)->position==2)
-//            {
-//                if(lnum.at(i)->isclicked){
-//                    lnum.at(i)->hide();
-//                    lnum.removeAt(i);//消除方块
-//                    ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-//                    break;
-//                }
-//            }
-//        killTimer(tm_down);
-//    }
-//    else if (event->timerId() == tm_right) {
-//        for(int i=0;i<lnum.size();i++)
-//            if(lnum.at(i)->position==3)
-//            {
-//                if(lnum.at(i)->isclicked){
-//                    lnum.at(i)->hide();
-//                    lnum.removeAt(i);//消除方块
-//                    ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-//                    break;
-//                }
-//            }
-//        killTimer(tm_right);
-//    }
 }
 
 void MyMusic::keyPressEvent(QKeyEvent *event)
 {
 
     result r=bad;
-    if(event->key() == Qt::Key_Left){
+    if(event->key()==Qt::Key_Escape){
+        on_stop_button_clicked();
+    }
+    else if(event->key() == Qt::Key_Left){
         ui->check_label_left->setVisible(true);
         ui->left_dis->setPixmap(QPixmap::fromImage(*left));
         for(int i=0;i<lnum.size();i++){
@@ -548,6 +635,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                     up_time.start(200);
                     connect(&up_time,&QTimer::timeout,this,[&](){
                         for(int i=0;i<lnum.size();i++)
+                        {
                             if(lnum.at(i)->position==1)
                             {
                                 if(lnum.at(i)->isclicked){
@@ -559,6 +647,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                                     break;
                                 }
                             }
+                        }
                     });
                 }
                 break;
@@ -664,6 +753,18 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     }
     else return;
     score+=int(r)*100;
+    if(type==hp){
+        int value=ui->HP->value();
+        if(r==bad){
+            ui->HP->setValue(value-10);
+        }
+        else if(r==good){
+            ui->HP->setValue(value+2);
+        }
+        else if(r==perfect){
+            ui->HP->setValue(value+5);
+        }
+    }
     ui->perfect_lable->setText(QString::number(score));
     numm = new QImage;
     if (combo == 0){
@@ -817,3 +918,16 @@ void MyMusic::on_stop_button_clicked()
         ispause=0;
     }
 }
+
+void MyMusic::on_end_close_clicked()
+{
+    exit(0);
+}
+
+void MyMusic::on_to_main_clicked()
+{
+    emit back_to();
+}
+
+
+

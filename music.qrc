@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>TheCrave.mp3</file>
         <file>TheCrave.txt</file>
-        <file>ori_01.mp3</file>
         <file>ori_01.txt</file>
+        <file>ori_01.mp3</file>
     </qresource>
 </RCC>

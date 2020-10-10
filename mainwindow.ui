@@ -66,6 +66,32 @@
        <string/>
       </property>
      </widget>
+     <widget class="QPushButton" name="challenge">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>545345</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>7657</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="mode_page">
      <widget class="QLabel" name="background_mode">
@@ -85,7 +111,7 @@
       <property name="geometry">
        <rect>
         <x>175</x>
-        <y>180</y>
+        <y>60</y>
         <width>175</width>
         <height>175</height>
        </rect>
@@ -98,7 +124,7 @@
       <property name="geometry">
        <rect>
         <x>175</x>
-        <y>370</y>
+        <y>255</y>
         <width>175</width>
         <height>175</height>
        </rect>
@@ -110,8 +136,8 @@
      <widget class="QPushButton" name="mode_back_button">
       <property name="geometry">
        <rect>
-        <x>175</x>
-        <y>600</y>
+        <x>320</x>
+        <y>660</y>
         <width>175</width>
         <height>51</height>
        </rect>
@@ -123,23 +149,26 @@
      <widget class="QLabel" name="music_choose">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>420</y>
-        <width>191</width>
-        <height>71</height>
+        <x>360</x>
+        <y>410</y>
+        <width>161</width>
+        <height>61</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255)</string>
+      </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;点歌&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="roll_music_button">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>500</y>
-        <width>51</width>
-        <height>51</height>
+        <x>390</x>
+        <y>530</y>
+        <width>91</width>
+        <height>91</height>
        </rect>
       </property>
       <property name="text">
@@ -149,10 +178,10 @@
      <widget class="QPushButton" name="mode_hp_button">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>30</y>
-        <width>181</width>
-        <height>121</height>
+        <x>175</x>
+        <y>450</y>
+        <width>175</width>
+        <height>175</height>
        </rect>
       </property>
       <property name="font">
@@ -165,6 +194,13 @@
        <string>HP</string>
       </property>
      </widget>
+     <zorder>background_mode</zorder>
+     <zorder>mode_normal_button</zorder>
+     <zorder>mode_hard_button</zorder>
+     <zorder>mode_back_button</zorder>
+     <zorder>roll_music_button</zorder>
+     <zorder>mode_hp_button</zorder>
+     <zorder>music_choose</zorder>
     </widget>
    </widget>
   </widget>

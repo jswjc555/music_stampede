@@ -36,5 +36,9 @@
         <file>image/an_right.png</file>
         <file>image/an_up.png</file>
         <file>image/stop.png</file>
+        <file>image/roll.png</file>
+        <file>image/combo.png</file>
+        <file>image/score.png</file>
+        <file>image/qg.gif</file>
     </qresource>
 </RCC>

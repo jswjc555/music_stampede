@@ -16,14 +16,13 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+
     ~MainWindow();
 protected:
 
 private slots:
 
     void on_start_game_clicked();
-
-    void on_challenge_clicked();
 
     void on_exit_game_clicked();
 
@@ -35,12 +34,11 @@ private slots:
 
     void on_roll_music_button_clicked();
 
-    void on_pushButton_clicked();
-
     void on_mode_hp_button_clicked();
 
 public slots:
     void GameOver(int);
+    void to_me();
 private:
     MyMusic *music=0;
     Ui::MainWindow *ui;
