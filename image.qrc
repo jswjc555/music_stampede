@@ -37,8 +37,19 @@
         <file>image/an_up.png</file>
         <file>image/stop.png</file>
         <file>image/roll.png</file>
-        <file>image/combo.png</file>
-        <file>image/score.png</file>
         <file>image/qg.gif</file>
+        <file>image/hp_mode.png</file>
+        <file>image/back_01.png</file>
+        <file>image/back_00.png</file>
+        <file>image/gangqin.png</file>
+        <file>image/dianyin.png</file>
+        <file>image/right_right.png</file>
+        <file>image/hp_mode_ch.png</file>
+        <file>image/normal_mode_ch.png</file>
+        <file>image/hard_mode_ch.png</file>
+        <file>image/right_right_hp.png</file>
+        <file>image/menlian.gif</file>
+        <file>image/icon.png</file>
+        <file>image/popsong.png</file>
     </qresource>
 </RCC>

@@ -83,14 +83,14 @@ public:
         mode_hard_button->setGeometry(QRect(175, 255, 175, 175));
         mode_back_button = new QPushButton(mode_page);
         mode_back_button->setObjectName(QStringLiteral("mode_back_button"));
-        mode_back_button->setGeometry(QRect(320, 660, 175, 51));
+        mode_back_button->setGeometry(QRect(140, 660, 250, 50));
         music_choose = new QLabel(mode_page);
         music_choose->setObjectName(QStringLiteral("music_choose"));
-        music_choose->setGeometry(QRect(360, 410, 161, 61));
+        music_choose->setGeometry(QRect(380, 270, 141, 131));
         music_choose->setStyleSheet(QStringLiteral("color:rgb(255,255,255)"));
         roll_music_button = new QPushButton(mode_page);
         roll_music_button->setObjectName(QStringLiteral("roll_music_button"));
-        roll_music_button->setGeometry(QRect(390, 530, 91, 91));
+        roll_music_button->setGeometry(QRect(400, 440, 91, 91));
         mode_hp_button = new QPushButton(mode_page);
         mode_hp_button->setObjectName(QStringLiteral("mode_hp_button"));
         mode_hp_button->setGeometry(QRect(175, 450, 175, 175));
@@ -110,7 +110,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -127,10 +127,10 @@ public:
         background_mode->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         mode_normal_button->setText(QString());
         mode_hard_button->setText(QString());
-        mode_back_button->setText(QApplication::translate("MainWindow", "\350\277\224\345\233\236", Q_NULLPTR));
+        mode_back_button->setText(QString());
         music_choose->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"right\">\347\202\271\346\255\214</p></body></html>", Q_NULLPTR));
-        roll_music_button->setText(QApplication::translate("MainWindow", "roll", Q_NULLPTR));
-        mode_hp_button->setText(QApplication::translate("MainWindow", "HP", Q_NULLPTR));
+        roll_music_button->setText(QString());
+        mode_hp_button->setText(QString());
     } // retranslateUi
 
 };

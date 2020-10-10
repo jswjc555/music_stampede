@@ -124,6 +124,7 @@ release/qrc_image.cpp: image.qrc \
 		image/start.png \
 		image/3.png \
 		image/an_down.png \
+		image/back_01.png \
 		image/none.png \
 		image/dis_up.gif \
 		image/exit.png \
@@ -131,6 +132,7 @@ release/qrc_image.cpp: image.qrc \
 		image/main_back.png \
 		image/good.gif \
 		image/2.png \
+		image/back_00.png \
 		image/cheng.png \
 		image/background.gif \
 		image/qg.gif \
@@ -140,24 +142,31 @@ release/qrc_image.cpp: image.qrc \
 		image/short_key.png \
 		image/long_key.png \
 		image/perfect.gif \
+		image/normal_mode_ch.png \
 		image/0.png \
+		image/hard_mode_ch.png \
 		image/dis_left.gif \
 		image/9.png \
 		image/an_left.png \
+		image/hp_mode.png \
 		image/8.png \
 		image/roll.png \
-		image/score.png \
+		image/right_right.png \
 		image/7.png \
+		image/right_right_hp.png \
+		image/dianyin.png \
 		image/dis_right.gif \
 		image/6.png \
 		image/normal_mode.png \
+		image/gangqin.png \
 		image/hard_mode.png \
 		image/5.png \
 		image/exit_on.png \
+		image/hp_mode_ch.png \
 		image/an_up.png \
-		image/combo.png \
 		image/start_on.png \
 		image/4.png \
+		image/menlian.gif \
 		image/stop.png
 	S:\qt\5.9.2\mingw53_32\bin\rcc.exe -name image image.qrc -o release\qrc_image.cpp
 

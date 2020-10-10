@@ -9,24 +9,11 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentWidget(ui->play_page);
-    musicpath<<":/TheCrave.txt"<<"qrc:/TheCrave.mp3"<<":/ori_01.txt"<<"qrc:/ori_01.mp3";
+    musicpath<<":/TheCrave.txt"<<"qrc:/TheCrave.mp3"<<":/ori_01.txt"<<"qrc:/ori_01.mp3"<<":/lianaixunhuan.txt"<<"qrc:/lianaixunhuan.mp3";
     for(int i=0;i<50;i++)
     player=new QMediaPlayer(this);
     ui->HP->hide();
     setWindowTitle("节奏大佬");
-//    switch (music_no) {
-//    case 0:
-//    {
-//        f=new QFile(":/TheCrave.txt",this);
-//        player->setMedia(QUrl("qrc:/TheCrave.mp3"));
-//        break;
-//    }
-//    case 1:{
-//        f=new QFile(":/ori_01.txt",this);
-//        player->setMedia(QUrl("qrc:/ori_01.mp3"));
-//        break;
-//    }
-//    }
     if(type==hp){
         f=new QFile(musicpath[index*2],this);
         player->setMedia(QUrl(musicpath[index*2+1]));
@@ -108,7 +95,6 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     sumtime.setInterval(sencond*1000);
     ui->lcdNumber->setDigitCount(5);
     ui->lcdNumber->setVisible(false);
-    ui->combo_image->setText("COMBO:");
 
     ui->left_gif->setScaledContents(true);
     ui->up_gif->setScaledContents(true);
@@ -136,6 +122,10 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
 
 
 
+    ui->menlian_label->setScaledContents(true);
+    menlian = new QMovie(":/image/menlian.gif");
+    ui->menlian_label->setMovie(menlian);
+    menlian->start();
     gif_quiet =new QImage;
     gif_quiet->load(":/image/none.png");
     ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
@@ -174,40 +164,47 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     ui->stop_button->setStyleSheet("QPushButton{border-image: url(:/image/stop.png)}");
 
     main_back=new QImage; //新建一个image对象
-    ui->main_back->setScaledContents(true);//自适应大小
-    main_back->load(":/image/main_back.png"); //将图像资源载入对象img，注意路径，可点进图片右键复制路径
-    ui->main_back->setPixmap(QPixmap::fromImage(*main_back)); //将图片放入label，使用setPixmap,注意指针*img
+    ui->main_back->setScaledContents(true);
+    main_back->load(":/image/main_back.png");
+    ui->main_back->setPixmap(QPixmap::fromImage(*main_back));
     bar=new QImage;
     ui->bar_label->setScaledContents(true);
     bar->load(":/image/check_bar.png");
     ui->bar_label->setPixmap(QPixmap::fromImage(*bar));
-    score_image = new QImage;
-    ui->score_image->setScaledContents(true);
-    score_image->load(":/image/score.png");
-    ui->score_image->setPixmap(QPixmap::fromImage(*score_image));
-    combo_image = new QImage;
-    ui->combo_image->setScaledContents(true);
-    combo_image->load(":/image/combo.png");
-    ui->combo_image->setPixmap(QPixmap::fromImage(*combo_image));
     mode = new QImage;
     ui->pattern_label->setScaledContents(true);
+    ui->right_right_label->setScaledContents(true);
+    right_right = new QImage;
     if(type == diff)
     {
+        right_right->load(":/image/right_right.png");
         mode->load(":/image/hard_mode.png");
         min=sencond/60;
         sec=sencond%60;
     }
     else if(type == easy)
     {
+        right_right->load(":/image/right_right.png");
          mode->load(":/image/normal_mode.png");
          min=sencond/60;
          sec=sencond%60;
     }
     else if (type == hp) {
+        mode->load(":/image/hp_mode.png");
+        right_right->load(":/image/right_right_hp.png");
        ui->HP->show();
-       ui->score_image->setVisible(false);
        ui->perfect_lable->setVisible(false);
+       ui->HP->raise();
     }
+    ui->lcdNumber->raise();
+    ui->cheng_label->raise();
+    ui->combo_left->raise();
+    ui->combo_right->raise();
+    ui->perfect_lable->raise();
+    ui->pattern_label->raise();
+    ui->stop_button->raise();
+
+    ui->right_right_label->setPixmap(QPixmap::fromImage(*right_right));
     ui->pattern_label->setPixmap(QPixmap::fromImage(*mode));
     connect(this,SIGNAL(back_to()),w,SLOT(to_me()));
     this->grabKeyboard();
@@ -244,9 +241,9 @@ int MyMusic::rand(int a,int b)
 result MyMusic::check(MyLabel *y)
 {
     int h=ui->bar_label->geometry().y();//槽的顶部y坐标
-    if(israng(y->gety()+y->height()/2,h+lable_width/2,y->height()/2))
+    if(israng(y->gety()+y->height()/2,h+lable_width/2,y->height()/4))
         return perfect;
-    if(israng(y->gety(),h,y->height()))
+    if(israng(y->gety(),h,y->height()/2))
         return good;
     return bad;
 }
@@ -274,6 +271,7 @@ void MyMusic::closeEvent(QCloseEvent *event)
     }
     else
     {
+        player->stop();
         killTimer(tm_label);
         killTimer(tm_lcd);
         while(lnum.size()){
@@ -306,6 +304,7 @@ void MyMusic::deleteit()
                 delete lnum[i];
                 lnum[i]=nullptr;
                 lnum.removeAt(i);
+                hpvalue-=10;
                 break;
             }
         }
@@ -381,8 +380,15 @@ void MyMusic::timerEvent(QTimerEvent *event)
         }
     }
     else if (event->timerId() == tm_label) {
+        if(type==hp)
+               {
+                   if(hpvalue<0) ui->HP->setValue(0);
+                   else if(hpvalue>100) ui->HP->setValue(100);
+                   else ui->HP->setValue(hpvalue);
+               }
         if(type==hp&&ui->HP->value()<=0)
         {
+            player->stop();
             killTimer(tm_label);
             killTimer(tm_lcd);
             while(lnum.size()){
@@ -754,17 +760,19 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     else return;
     score+=int(r)*100;
     if(type==hp){
-        int value=ui->HP->value();
-        if(r==bad){
-            ui->HP->setValue(value-10);
+            if(r==bad){
+                hpvalue-=10;
+                if(hpvalue<0) hpvalue=0;
+            }
+            else if(r==good){
+                hpvalue+=2;
+                if(hpvalue>100) hpvalue=100;
+            }
+            else if(r==perfect){
+                hpvalue+=5;
+                if(hpvalue>100) hpvalue=100;
+            }
         }
-        else if(r==good){
-            ui->HP->setValue(value+2);
-        }
-        else if(r==perfect){
-            ui->HP->setValue(value+5);
-        }
-    }
     ui->perfect_lable->setText(QString::number(score));
     numm = new QImage;
     if (combo == 0){

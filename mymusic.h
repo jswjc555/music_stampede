@@ -72,11 +72,12 @@ private:
     Ui::MyMusic *ui;
     MyMovie *dis;
     MyMovie *pingjia;
-    QMovie *up_dis,*left_dis,*down_dis,*right_dis;
+    QMovie *up_dis,*left_dis,*down_dis,*right_dis,*menlian;
     QImage *gif_quiet=nullptr;
     QImage *left=nullptr,*up=nullptr,*down=nullptr,*right=nullptr;
-    QImage *long_key=0 ,*short_key=0,* main_back=0,* bar=0,* mode=0,*score_image,*combo_image;
+    QImage *long_key=0 ,*short_key=0,* main_back=0,* bar=0,* mode=0,*right_right=0;
     QImage *numm=nullptr,*num=nullptr;
+    int hpvalue = 100;
 public slots:
     void deleteit();
     void up_quiet();

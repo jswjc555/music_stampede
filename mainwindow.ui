@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="start_page">
      <widget class="QPushButton" name="start_game">
@@ -136,23 +136,23 @@
      <widget class="QPushButton" name="mode_back_button">
       <property name="geometry">
        <rect>
-        <x>320</x>
+        <x>140</x>
         <y>660</y>
-        <width>175</width>
-        <height>51</height>
+        <width>250</width>
+        <height>50</height>
        </rect>
       </property>
       <property name="text">
-       <string>返回</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="music_choose">
       <property name="geometry">
        <rect>
-        <x>360</x>
-        <y>410</y>
-        <width>161</width>
-        <height>61</height>
+        <x>380</x>
+        <y>270</y>
+        <width>141</width>
+        <height>131</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -165,14 +165,14 @@
      <widget class="QPushButton" name="roll_music_button">
       <property name="geometry">
        <rect>
-        <x>390</x>
-        <y>530</y>
+        <x>400</x>
+        <y>440</y>
         <width>91</width>
         <height>91</height>
        </rect>
       </property>
       <property name="text">
-       <string>roll</string>
+       <string/>
       </property>
      </widget>
      <widget class="QPushButton" name="mode_hp_button">
@@ -191,7 +191,7 @@
        </font>
       </property>
       <property name="text">
-       <string>HP</string>
+       <string/>
       </property>
      </widget>
      <zorder>background_mode</zorder>
