@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle("Click track");
     this->setFixedSize(main_WIDTH,main_HIGH);
     ui->stackedWidget->setFixedSize(main_WIDTH,main_HIGH);
     ui->movie_label->setFixedSize(main_WIDTH,main_HIGH);
@@ -25,6 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QImage *song = new QImage;
     song->load(":/image/gangqin.png");
     ui->music_choose->setPixmap(QPixmap::fromImage(*song));
+    QImage *title = new QImage;
+    ui->title_label->setScaledContents(true);
+    title->load(":/image/title.png");
+    ui->title_label->setPixmap(QPixmap::fromImage(*title));
 
     ui->roll_music_button->setStyleSheet("QPushButton{border-image: url(:/image/roll.png)}");
     ui->mode_normal_button->setStyleSheet("QPushButton{border-image: url(:/image/normal_mode.png)}"

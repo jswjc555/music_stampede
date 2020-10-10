@@ -13,62 +13,11 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     for(int i=0;i<50;i++)
     player=new QMediaPlayer(this);
     ui->HP->hide();
-    setWindowTitle("节奏大佬");
+    setWindowTitle("Click track");
     if(type==hp){
         f=new QFile(musicpath[index*2],this);
         player->setMedia(QUrl(musicpath[index*2+1]));
-        connect(&sumtime,&QTimer::timeout,this,[&](){
-            index++;
-            nn=0;combo=0;
-            if(index>2){
-                killTimer(tm_label);
-                killTimer(tm_lcd);
-                while(lnum.size()){
-                    lnum.at(0)->hide();
-                    delete lnum[0];
-                    lnum[0]=nullptr;
-                    lnum.removeAt(0);
-                }
-                while(flnum.size()){
-                    flnum.at(0)->hide();
-                    delete flnum[0];
-                    flnum[0]=nullptr;
-                    flnum.removeAt(0);
-                }
-                ui->stackedWidget->setCurrentWidget(ui->end_page);              
-            }
-            else
-            {
-                killTimer(tm_lcd);
-                killTimer(tm_label);
-                ui->stackedWidget->setCurrentWidget(ui->qiege_page);
-                MyMovie *dianbo=new MyMovie(":/image/qg.gif",QByteArray(),this);
-                ui->dianbo->setScaledContents(true);
-                ui->dianbo->setMovie(dianbo);
-                delete f;
-                f=new QFile(musicpath[index*2],this);
-                player->setMedia(QUrl(musicpath[index*2+1]));
-                if(!f->open(QIODevice::ReadOnly)){return;}
-                int i=0;
-                QString file=QString(f->readAll().data());
-                while (1) {
-                    QString s=file.section("\n",i,i);
-                    if(s=="") {n=i-1;break;}
-                    sump.append(s.toInt());
-                    i++;
-                }
-                sencond=sump[n]/200;
-                sumtime.start(sencond);
-                f->close();
-                connect(dianbo,&MyMovie::finished,this,[&](){
-                    ui->stackedWidget->setCurrentWidget(ui->play_page);
-                    tm_label=startTimer(5);
-                    tm_lcd=startTimer(1000);
-                    sumtime.start(sencond);
-                });
-                dianbo->start();
-            }
-        });
+        connect(&sumtime,&QTimer::timeout,this,&MyMusic::restart);
     }
     else
     {
@@ -355,6 +304,11 @@ void MyMusic::start()
 void MyMusic::timerEvent(QTimerEvent *event)
 {
     if(ispause) return;
+    if(isrestart){
+        sumtime.start(sencond*1000);
+        player->play();
+        isrestart=0;
+    }
     if(event->timerId() == tm_lcd){
         if(type==hp){
             ui->lcdNumber->display(QString("%1:%2").arg(min,2,10,QLatin1Char( '0' )).arg(sec,2,10,QLatin1Char( '0' )));
@@ -397,6 +351,12 @@ void MyMusic::timerEvent(QTimerEvent *event)
                 lnum[0]=nullptr;
                 lnum.removeAt(0);
             }
+            while(flnum.size()){
+                flnum.at(0)->hide();
+                delete flnum[0];
+                flnum[0]=nullptr;
+                flnum.removeAt(0);
+            }
             QMessageBox::information(NULL,"游戏结束","血量为零！！！");
             ui->stackedWidget->setCurrentWidget(ui->end_page);
             if(type==hp)
@@ -415,13 +375,10 @@ void MyMusic::timerEvent(QTimerEvent *event)
             else{
                 if(type==easy)
                 {
-                    int nnn=0;
                     for(int j=0;j<4;j++){
                         if(y&(1<<j)){//二进制的方法判断哪些位置应该出现方块
-                            if(nnn>1) break;
                             MyLabel *p =new MyLabel(this,j,normal);
                             lnum.append(p);
-                            nnn++;
                         }
                     }
                 }
@@ -530,10 +487,12 @@ void MyMusic::timerEvent(QTimerEvent *event)
         {
             if(combo>=5)
             {
-
+                int nnn=0;
                 int y=rand(15,1);//获得一个1-15的随机数
                 for(int j=0;j<4;j++){
                     if(y&(1<<j)){//二进制的方法判断哪些位置应该出现方块
+                        nnn++;
+                        if(nnn>2) break;
                         MyLabel*p=new MyLabel(this,j,isfalse);
                         flnum.append(p);
                     }
@@ -935,6 +894,71 @@ void MyMusic::on_end_close_clicked()
 void MyMusic::on_to_main_clicked()
 {
     emit back_to();
+}
+void MyMusic::restart()
+{
+                index++;
+                nn=0;combo=0;
+                if(index>3){
+                ispause=1;
+                    while(lnum.size()){
+                        lnum.at(0)->hide();
+                        delete lnum[0];
+                        lnum[0]=nullptr;
+                        lnum.removeAt(0);
+                    }
+                    while(flnum.size()){
+                        flnum.at(0)->hide();
+                        delete flnum[0];
+                        flnum[0]=nullptr;
+                        flnum.removeAt(0);
+                    }
+                    ui->stackedWidget->setCurrentWidget(ui->end_page);
+                }
+                else
+                {
+                    ispause=1;
+                    while(lnum.size()){
+                        lnum.at(0)->hide();
+                        delete lnum[0];
+                        lnum[0]=nullptr;
+                        lnum.removeAt(0);
+                    }
+                    while(flnum.size()){
+                        flnum.at(0)->hide();
+                        delete flnum[0];
+                        flnum[0]=nullptr;
+                        flnum.removeAt(0);
+                    }
+                    sump.clear();
+                    ui->stackedWidget->setCurrentWidget(ui->qiege_page);
+                    dianbo=new QMovie(":/image/qg.gif",QByteArray(),this);
+                    ui->dianbo->setScaledContents(true);
+                    ui->dianbo->setMovie(dianbo);
+                    delete f;
+                    f=new QFile(musicpath[index*2],this);
+                    player->setMedia(QUrl(musicpath[index*2+1]));
+                    if(!f->open(QIODevice::ReadOnly)){return;}
+                    int i=0;
+                    QString file=QString(f->readAll().data());
+                    while (1) {
+                        QString s=file.section("\n",i,i);
+                        if(s=="") {n=i-1;qDebug()<<n;break;}
+                        sump.append(s.toInt());
+                        i++;
+                    }
+                    sencond=sump[n]/200;
+                    qDebug()<<sencond;
+                    f->close();
+                    j.start(2000);
+                    connect(&j,&QTimer::timeout,this,[&](){
+                        ispause=0;
+                        j.stop();
+                        ui->stackedWidget->setCurrentWidget(ui->play_page);
+                        isrestart=1;
+                    });
+                    dianbo->start();
+                }
 }
 
 

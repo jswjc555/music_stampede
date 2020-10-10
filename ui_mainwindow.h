@@ -33,6 +33,7 @@ public:
     QPushButton *exit_game;
     QPushButton *challenge;
     QPushButton *pushButton;
+    QLabel *title_label;
     QWidget *mode_page;
     QLabel *background_mode;
     QPushButton *mode_normal_button;
@@ -69,6 +70,9 @@ public:
         pushButton = new QPushButton(start_page);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(130, 7657, 93, 28));
+        title_label = new QLabel(start_page);
+        title_label->setObjectName(QStringLiteral("title_label"));
+        title_label->setGeometry(QRect(100, 40, 350, 240));
         stackedWidget->addWidget(start_page);
         mode_page = new QWidget();
         mode_page->setObjectName(QStringLiteral("mode_page"));
@@ -110,7 +114,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -124,6 +128,7 @@ public:
         exit_game->setText(QString());
         challenge->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
+        title_label->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         background_mode->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         mode_normal_button->setText(QString());
         mode_hard_button->setText(QString());

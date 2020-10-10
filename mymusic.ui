@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="play_page">
     <widget class="QLabel" name="perfect_lable">
@@ -506,7 +506,7 @@ QProgressBar {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>380</y>
+       <y>315</y>
        <width>841</width>
        <height>171</height>
       </rect>

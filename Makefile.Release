@@ -145,10 +145,13 @@ release/qrc_image.cpp: image.qrc \
 		image/normal_mode_ch.png \
 		image/0.png \
 		image/hard_mode_ch.png \
+		image/popsong.png \
 		image/dis_left.gif \
 		image/9.png \
 		image/an_left.png \
+		image/icon.png \
 		image/hp_mode.png \
+		image/title.png \
 		image/8.png \
 		image/roll.png \
 		image/right_right.png \
@@ -173,6 +176,8 @@ release/qrc_image.cpp: image.qrc \
 release/qrc_music.cpp: music.qrc \
 		../../5.9.2/mingw53_32/bin/rcc.exe \
 		ori_01.txt \
+		lianaixunhuan.mp3 \
+		lianaixunhuan.txt \
 		TheCrave.mp3 \
 		TheCrave.txt \
 		ori_01.mp3

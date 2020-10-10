@@ -44,7 +44,7 @@ void MyLabel::moveEvent(QMoveEvent *)
             if(gety()>50+50*i) {setPixmap(QPixmap(":/imagene.png"));}
         }
         else if(mytype==canmove){
-            if(gety()>=490-150) return;
+            if(gety()>=490-200) return;
             int i=position;
             while (1) {
                 position=rand(4,0);

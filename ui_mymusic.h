@@ -208,12 +208,12 @@ public:
         background->setStyleSheet(QStringLiteral("background-color:rgb(0,0,0);"));
         dianbo = new QLabel(qiege_page);
         dianbo->setObjectName(QStringLiteral("dianbo"));
-        dianbo->setGeometry(QRect(0, 380, 841, 171));
+        dianbo->setGeometry(QRect(0, 315, 841, 171));
         stackedWidget->addWidget(qiege_page);
 
         retranslateUi(MyMusic);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MyMusic);

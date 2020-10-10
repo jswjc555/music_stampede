@@ -54,6 +54,9 @@ public:
     QTimer down_time;
     QList<MyLabel*>lnum;
     QList<MyLabel*>flnum;
+    QMovie *dianbo;
+    QTimer j;
+    bool isrestart=0;
 
     explicit MyMusic(QWidget *parent,QWidget *w,int music_no,gametype type=easy );
     ~MyMusic();
@@ -85,6 +88,7 @@ public slots:
     void down_quiet();
     void right_quiet();
     void deletemovie(MyMovie*);
+    void restart();
 signals:
     void gameover(int);
     void back_to();

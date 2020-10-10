@@ -51,5 +51,6 @@
         <file>image/menlian.gif</file>
         <file>image/icon.png</file>
         <file>image/popsong.png</file>
+        <file>image/title.png</file>
     </qresource>
 </RCC>
