@@ -7,7 +7,6 @@
         <file>image/start.png</file>
         <file>image/start_on.png</file>
         <file>image/zhuan.png</file>
-        <file>image/dis.gif</file>
         <file>image/perfect.gif</file>
         <file>image/good.gif</file>
         <file>image/check_bar.png</file>
@@ -30,5 +29,7 @@
         <file>image/7.png</file>
         <file>image/8.png</file>
         <file>image/9.png</file>
+        <file>image/hard_mode.png</file>
+        <file>image/dis.gif</file>
     </qresource>
 </RCC>

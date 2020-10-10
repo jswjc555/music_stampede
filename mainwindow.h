@@ -1,7 +1,6 @@
 ﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include"mymusic.h"
-#include"diffmusic.h"
 #include <QMainWindow>
 #include <QDebug>
 #include <QMovie>
@@ -28,12 +27,20 @@ private slots:
 
     void on_exit_game_clicked();
 
+    void on_mode_back_button_clicked();
+
+    void on_mode_normal_button_clicked();
+
+    void on_mode_hard_button_clicked();
+
+    void on_roll_music_button_clicked();
+
 public slots:
     void GameOver(int);
 private:
     MyMusic *music=0;
-    DiffMusic *dmusic=0;
     Ui::MainWindow *ui;
+    int music_no;
 
 };
 

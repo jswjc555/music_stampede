@@ -3,14 +3,27 @@
 #define cout qDebug() << "{" << __FILE__ << ":" << __LINE__ << "}"
 
 
-MyMusic::MyMusic(QWidget *parent, QWidget *w, gametype type) :
+MyMusic::MyMusic(QWidget *parent, QWidget *w, int music_no,gametype type) :
     QWidget(parent),w(w),type(type),
     ui(new Ui::MyMusic)
 {
     ui->setupUi(this);
     for(int i=0;i<50;i++)
     global_i[i][0] = 0;//1代表被消除
-    f=new QFile(":/test.txt",this);
+    player=new QMediaPlayer(this);
+    switch (music_no) {
+    case 0:
+    {
+        f=new QFile(":/TheCrave.txt",this);
+        player->setMedia(QUrl("qrc:/TheCrave.mp3"));
+        break;
+    }
+    case 1:{
+        f=new QFile(":/ori_01.txt",this);
+        player->setMedia(QUrl("qrc:/ori_01.mp3"));
+        break;
+    }
+    }
     if(!f->open(QIODevice::ReadOnly)){return;}
     int i=0;
     QString file=QString(f->readAll().data());
@@ -20,8 +33,7 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, gametype type) :
         sump.append(s.toInt());
         i++;
     }
-    player=new QMediaPlayer(this);
-    player->setMedia(QUrl("qrc:/TheCrave.mp3"));
+
     player->setVolume(100);
     sencond=sump[n]/200;
 
@@ -48,7 +60,7 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, gametype type) :
     ui->check_label_down->setScaledContents(true);
     ui->check_label_right->setScaledContents(true);
 
-    QImage *num = new QImage;
+    num = new QImage;
     ui->cheng_label->setScaledContents(true);
     ui->combo_left->setScaledContents(true);
     ui->combo_right->setScaledContents(true);
@@ -66,13 +78,22 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, gametype type) :
     ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
     ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
     ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
+    up = new QImage;
+    up->load(":/image/0.png");
+    left = new QImage;
+    left->load(":/image/0.png");
+    right = new QImage;
+    right->load(":/image/0.png");
+    down = new QImage;
+    down->load(":/image/0.png");
 
-    QImage *long_key = new QImage;
+
+    long_key = new QImage;
     long_key->load(":/image/long_key.png");
     ui->down_cover->setPixmap(QPixmap::fromImage(*long_key));
     ui->down_cover->raise();
 
-    QImage *short_key = new QImage;
+    short_key = new QImage;
     short_key->load(":/image/short_key.png");
     ui->check_label_left->setPixmap(QPixmap::fromImage(*short_key));
     ui->check_label_up->setPixmap(QPixmap::fromImage(*short_key));
@@ -83,17 +104,21 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, gametype type) :
     ui->check_label_down->setVisible(false);
     ui->check_label_right->setVisible(false);
 
-    QImage *main_back=new QImage; //新建一个image对象
+    main_back=new QImage; //新建一个image对象
     ui->main_back->setScaledContents(true);//自适应大小
     main_back->load(":/image/main_back.png"); //将图像资源载入对象img，注意路径，可点进图片右键复制路径
     ui->main_back->setPixmap(QPixmap::fromImage(*main_back)); //将图片放入label，使用setPixmap,注意指针*img
-    QImage *bar=new QImage;
+    bar=new QImage;
     ui->bar_label->setScaledContents(true);
     bar->load(":/image/check_bar.png");
     ui->bar_label->setPixmap(QPixmap::fromImage(*bar));
-    QImage *mode = new QImage;
+    mode = new QImage;
     ui->pattern_label->setScaledContents(true);
-    mode->load(":/image/normal_mode.png");
+    if(type == diff)
+        mode->load(":/image/hard_mode.png");
+    else {
+         mode->load(":/image/normal_mode.png");
+    }
     ui->pattern_label->setPixmap(QPixmap::fromImage(*mode));
 
 
@@ -108,16 +133,24 @@ MyMusic::MyMusic(QWidget *parent, QWidget *w, gametype type) :
     connect(&sumtime,&QTimer::timeout,this,[&](){
         emit gameover(score);//音乐结束时触发
     });
-    connect(this,&MyMusic::destroyed,this,[&](){
-        if((min*60+sec)==0) return;
-        emit gameover(score);//玩家强行关闭时触发
-    });
 }
 
 MyMusic::~MyMusic()
 {
     if(f->isOpen())
         f->close();
+    if(num!=nullptr) delete num;
+    if(numm!=nullptr) delete numm;
+    if(gif_quiet!=nullptr) delete gif_quiet;
+    if(left!=nullptr) delete left;
+    if(up!=nullptr) delete up;
+    if(down!=nullptr) delete down;
+    if(right!=nullptr) delete right;
+    if(long_key!=0) delete long_key;
+    if(short_key!=0) delete short_key;
+    if(main_back!=0) delete main_back;
+    if(bar!=0) delete bar;
+    if(mode!=0) delete mode;
     delete ui;
 }
 
@@ -159,53 +192,10 @@ void MyMusic::deleteit()
             if(lnum.at(i)->isHidden()){
                 if(!lnum.at(i)->isclicked)
                     combo=0;//连击清零
+                delete lnum[i];
+                lnum[i]=nullptr;
                 lnum.removeAt(i);
                 return;
-            }
-        }
-}
-void MyMusic::deletegif_left()
-{
-    for(int i=0;i<lnum.size();i++)
-        if(lnum.at(i)->position==0)
-        {
-            if(lnum.at(i)->isclicked){
-                lnum.at(i)->hide();
-                lnum.removeAt(i);//消除方块
-                ui->left_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-                break;
-            }
-        }
-
-}
-
-void MyMusic::deletegif_up()
-{
-    for(int i=0;i<lnum.size();i++)
-        if(lnum.at(i)->position==1)
-        {
-
-            if(lnum.at(i)->isclicked){
-                lnum.at(i)->hide();
-                lnum.removeAt(i);//消除方块
-                ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-                //ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
-                break;
-            }
-        }
-}
-
-
-void MyMusic::deletegif_down()
-{
-    for(int i=0;i<lnum.size();i++)
-        if(lnum.at(i)->position==2)
-        {
-            if(lnum.at(i)->isclicked){
-                lnum.at(i)->hide();
-                lnum.removeAt(i);//消除方块
-                ui->down_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-                break;
             }
         }
 }
@@ -230,19 +220,6 @@ void MyMusic::right_quiet()
     ui->right_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
 }
 
-void MyMusic::deletegif_right()
-{
-    for(int i=0;i<lnum.size();i++)
-        if(lnum.at(i)->position==3)
-        {
-            if(lnum.at(i)->isclicked){
-                lnum.at(i)->hide();
-                lnum.removeAt(i);//消除方块
-                ui->right_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
-                break;
-            }
-        }
-}
 
 int MyMusic::cha(int i)
 {
@@ -260,6 +237,7 @@ void MyMusic::start()
 }
 void MyMusic::timerEvent(QTimerEvent *event)
 {
+    if(ispause) return;
     if(event->timerId() == tm_lcd){
          ui->lcdNumber->display(QDateTime::currentDateTime().toString(QString::number(min)+":"+QString::number(sec)));
          sec--;
@@ -285,7 +263,7 @@ void MyMusic::timerEvent(QTimerEvent *event)
                     for(int j=0;j<4;j++){
                         if(y&(1<<j)){//二进制的方法判断哪些位置应该出现方块
                             if(nnn>1) break;
-                            MyLabel*p=new MyLabel(this,j,normal);
+                            MyLabel *p =new MyLabel(this,j,normal);
                             lnum.append(p);
                             nnn++;
                         }
@@ -437,6 +415,8 @@ void MyMusic::timerEvent(QTimerEvent *event)
 
                 if(lnum.at(i)->isclicked){
                     lnum.at(i)->hide();
+                    delete lnum[i];
+                    lnum[i]=nullptr;
                     lnum.removeAt(i);//消除方块
                     ui->up_gif->setPixmap(QPixmap::fromImage(*gif_quiet));
                     //ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
@@ -471,6 +451,25 @@ void MyMusic::timerEvent(QTimerEvent *event)
             }
         killTimer(tm_right);
     }
+    else if (event->timerId() == tmust_left) {
+        killTimer(tmust_left);
+       ui->left_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+    }
+    else if (event->timerId() == tmust_up) {
+        killTimer(tmust_up);
+       ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+
+    }
+    else if (event->timerId() == tmust_down) {
+        killTimer(tmust_down);
+       ui->down_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+
+    }
+    else if (event->timerId() == tmust_right) {
+        killTimer(tmust_right);
+       ui->right_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
+
+    }
 }
 
 void MyMusic::keyPressEvent(QKeyEvent *event)
@@ -479,13 +478,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     result r=bad;
     if(event->key() == Qt::Key_Left){
         ui->check_label_left->setVisible(true);
-        left_dis = new QMovie(":/image/dis_left.gif");
-        ui->left_dis->setMovie(left_dis);
-        left_dis->start();
-        QTimer *qTimer = new QTimer(this);
-        connect(qTimer,SIGNAL(timeout()),this,SLOT(left_quiet()));
-        qTimer->setSingleShot(true);
-        qTimer->start(600);
+        ui->left_dis->setPixmap(QPixmap::fromImage(*left));
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==0){
                 r=check(lnum.at(i));
@@ -498,19 +491,19 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                 if(r!=bad )
                 {
                     if(r == perfect){
-                        pingjia = new QMovie(":/image/perfect.gif");
+                        pingjia = new QMovie(":/image/perfect.gif",QByteArray(),this);
                         ui->left_gif->setMovie(pingjia);
                         pingjia->start();
                     }
                     else if (r == good) {
-                        pingjia = new QMovie(":/image/good.gif");
+                        pingjia = new QMovie(":/image/good.gif",QByteArray(),this);
                         ui->left_gif->setMovie(pingjia);
                         pingjia->start();
                     }
-                    dis = new QMovie(":/image/dis.gif");
+                    dis = new QMovie(":/image/dis.gif",QByteArray(),this);
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    tm_left = this->startTimer(600);
+                    tm_left = this->startTimer(200);
                 }
                 break;
             }
@@ -518,13 +511,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Up) {
         ui->check_label_up->setVisible(true);
-        up_dis = new QMovie(":/image/dis_up.gif");
-        ui->up_dis->setMovie(up_dis);
-        up_dis->start();
-        QTimer *qTimer = new QTimer(this);
-        connect(qTimer,SIGNAL(timeout()),this,SLOT(up_quiet()));
-        qTimer->setSingleShot(true);
-        qTimer->start(600);
+        ui->up_dis->setPixmap(QPixmap::fromImage(*up));
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==1){
                 r=check(lnum.at(i));
@@ -538,19 +525,19 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                 {
 
                     if(r == perfect){
-                        pingjia = new QMovie(":/image/perfect.gif");
+                        pingjia = new QMovie(":/image/perfect.gif",QByteArray(),this);
                         ui->up_gif->setMovie(pingjia);
                         pingjia->start();
                     }
                     else if (r == good) {
-                        pingjia = new QMovie(":/image/good.gif");
+                        pingjia = new QMovie(":/image/good.gif",QByteArray(),this);
                         ui->up_gif->setMovie(pingjia);
                         pingjia->start();
                     }
-                    dis = new QMovie(":/image/dis.gif");
+                    dis = new QMovie(":/image/dis.gif",QByteArray(),this);
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    tm_up = startTimer(600);
+                    tm_up = startTimer(200);
                 }
                 break;
             }
@@ -558,13 +545,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Down) {
         ui->check_label_down->setVisible(true);
-        down_dis = new QMovie(":/image/dis_down.gif");
-        ui->down_dis->setMovie(down_dis);
-        down_dis->start();
-        QTimer *qTimer = new QTimer(this);
-        connect(qTimer,SIGNAL(timeout()),this,SLOT(down_quiet()));
-        qTimer->setSingleShot(true);
-        qTimer->start(600);
+        ui->down_dis->setPixmap(QPixmap::fromImage(*left));
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==2){
                 r=check(lnum.at(i));
@@ -577,19 +558,19 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                 if(r!=bad )
                 {
                     if(r == perfect){
-                        pingjia = new QMovie(":/image/perfect.gif");
+                        pingjia = new QMovie(":/image/perfect.gif",QByteArray(),this);
                         ui->down_gif->setMovie(pingjia);
                         pingjia->start();
                     }
                     else if (r == good) {
-                        pingjia = new QMovie(":/image/good.gif");
+                        pingjia = new QMovie(":/image/good.gif",QByteArray(),this);
                         ui->down_gif->setMovie(pingjia);
                         pingjia->start();
                     }
-                    dis = new QMovie(":/image/dis.gif");
+                    dis = new QMovie(":/image/dis.gif",QByteArray(),this);
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    tm_down = startTimer(600);
+                    tm_down = startTimer(200);
                 }
                 break;
             }
@@ -597,13 +578,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Right) {
        ui->check_label_right->setVisible(true);
-       right_dis = new QMovie(":/image/dis_right.gif");
-       ui->right_dis->setMovie(right_dis);
-       right_dis->start();
-       QTimer *qTimer = new QTimer(this);
-       connect(qTimer,SIGNAL(timeout()),this,SLOT(right_quiet()));
-       qTimer->setSingleShot(true);
-       qTimer->start(600);
+       ui->right_dis->setPixmap(QPixmap::fromImage(*left));
         for(int i=0;i<lnum.size();i++){
             if(lnum.at(i)->position==3){
                 r=check(lnum.at(i));
@@ -616,20 +591,20 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
                 if(r!=bad )
                 {
                     if(r == perfect){
-                        pingjia = new QMovie(":/image/perfect.gif");
+                        pingjia = new QMovie(":/image/perfect.gif",QByteArray(),this);
                         ui->right_gif->setMovie(pingjia);
                         pingjia->start();
                     }
                     else if (r == good) {
-                        pingjia = new QMovie(":/image/good.gif");
+                        pingjia = new QMovie(":/image/good.gif",QByteArray(),this);
                         ui->right_gif->setMovie(pingjia);
                         pingjia->start();
                     }
 
-                    dis = new QMovie(":/image/dis.gif");
+                    dis = new QMovie(":/image/dis.gif",QByteArray(),this);
                     lnum.at(i)->setMovie(dis);
                     dis->start();
-                    tm_right = startTimer(600);
+                    tm_right = startTimer(200);
                 }
                 break;
             }
@@ -638,7 +613,7 @@ void MyMusic::keyPressEvent(QKeyEvent *event)
     else return;
     score+=int(r)*100;
     ui->perfect_lable->setText(QString::number(score));
-    QImage *numm = new QImage;
+    numm = new QImage;
     if (combo == 0){
         numm->load(":/image/0.png");
         ui->combo_left->setPixmap(QPixmap::fromImage(*numm));;
@@ -755,36 +730,38 @@ void MyMusic::keyReleaseEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Left){
         ui->check_label_left->setVisible(false);
+        ui->left_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
 
     }
     else if (event->key() == Qt::Key_Up) {
         ui->check_label_up->setVisible(false);
+        ui->up_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
 
     }
     else if (event->key() == Qt::Key_Down) {
         ui->check_label_down->setVisible(false);
+        ui->down_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
     }
     else if (event->key() == Qt::Key_Right) {
         ui->check_label_right->setVisible(false);
+        ui->right_dis->setPixmap(QPixmap::fromImage(*gif_quiet));
     }
 }
-
 
 
 void MyMusic::on_stop_button_clicked()
 {
     player->stop();
-    killTimer(tm_lcd);
-    killTimer(tm_label);
+    ispause=1;
     qDebug()<<this->children().size();
+    int re=sumtime.remainingTime();
     sumtime.stop();
     QString str;
     str += "当前连击数combo: " + QString::number(combo) + "\n" + "当前分数: " + QString::number(score) +"\n休息一下，再接再厉吧！";
     int a =stop_MessageBox("暂停",str);
     if(a == 0){
         player->play();
-        tm_lcd = this->startTimer(1000);
-        tm_label = this->startTimer(5);
-        sumtime.start();
+        sumtime.start(re);
+        ispause=0;
     }
 }

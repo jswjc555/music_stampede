@@ -83,7 +83,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="left_gif">
@@ -174,7 +174,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="down_dis">
@@ -232,14 +232,22 @@
     <widget class="QLabel" name="combo_image">
      <property name="geometry">
       <rect>
-       <x>590</x>
+       <x>580</x>
        <y>280</y>
        <width>161</width>
        <height>51</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Arial Black</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>Combo：</string>
      </property>
     </widget>
     <widget class="QLabel" name="combo_left">
@@ -279,6 +287,27 @@
      </property>
      <property name="text">
       <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lianji_image">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>420</y>
+       <width>181</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial Black</family>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>连击：</string>
      </property>
     </widget>
    </widget>

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MyMusic_t {
-    QByteArrayData data[13];
-    char stringdata0[152];
+    QByteArrayData data[9];
+    char stringdata0[93];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,21 +35,16 @@ QT_MOC_LITERAL(0, 0, 7), // "MyMusic"
 QT_MOC_LITERAL(1, 8, 8), // "gameover"
 QT_MOC_LITERAL(2, 17, 0), // ""
 QT_MOC_LITERAL(3, 18, 8), // "deleteit"
-QT_MOC_LITERAL(4, 27, 14), // "deletegif_left"
-QT_MOC_LITERAL(5, 42, 12), // "deletegif_up"
-QT_MOC_LITERAL(6, 55, 15), // "deletegif_right"
-QT_MOC_LITERAL(7, 71, 14), // "deletegif_down"
-QT_MOC_LITERAL(8, 86, 8), // "up_quiet"
-QT_MOC_LITERAL(9, 95, 10), // "left_quiet"
-QT_MOC_LITERAL(10, 106, 10), // "down_quiet"
-QT_MOC_LITERAL(11, 117, 11), // "right_quiet"
-QT_MOC_LITERAL(12, 129, 22) // "on_stop_button_clicked"
+QT_MOC_LITERAL(4, 27, 8), // "up_quiet"
+QT_MOC_LITERAL(5, 36, 10), // "left_quiet"
+QT_MOC_LITERAL(6, 47, 10), // "down_quiet"
+QT_MOC_LITERAL(7, 58, 11), // "right_quiet"
+QT_MOC_LITERAL(8, 70, 22) // "on_stop_button_clicked"
 
     },
-    "MyMusic\0gameover\0\0deleteit\0deletegif_left\0"
-    "deletegif_up\0deletegif_right\0"
-    "deletegif_down\0up_quiet\0left_quiet\0"
-    "down_quiet\0right_quiet\0on_stop_button_clicked"
+    "MyMusic\0gameover\0\0deleteit\0up_quiet\0"
+    "left_quiet\0down_quiet\0right_quiet\0"
+    "on_stop_button_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,7 +54,7 @@ static const uint qt_meta_data_MyMusic[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -67,28 +62,20 @@ static const uint qt_meta_data_MyMusic[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   69,    2, 0x06 /* Public */,
+       1,    1,   49,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   72,    2, 0x0a /* Public */,
-       4,    0,   73,    2, 0x0a /* Public */,
-       5,    0,   74,    2, 0x0a /* Public */,
-       6,    0,   75,    2, 0x0a /* Public */,
-       7,    0,   76,    2, 0x0a /* Public */,
-       8,    0,   77,    2, 0x0a /* Public */,
-       9,    0,   78,    2, 0x0a /* Public */,
-      10,    0,   79,    2, 0x0a /* Public */,
-      11,    0,   80,    2, 0x0a /* Public */,
-      12,    0,   81,    2, 0x08 /* Private */,
+       3,    0,   52,    2, 0x0a /* Public */,
+       4,    0,   53,    2, 0x0a /* Public */,
+       5,    0,   54,    2, 0x0a /* Public */,
+       6,    0,   55,    2, 0x0a /* Public */,
+       7,    0,   56,    2, 0x0a /* Public */,
+       8,    0,   57,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    2,
 
  // slots: parameters
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -107,15 +94,11 @@ void MyMusic::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         switch (_id) {
         case 0: _t->gameover((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->deleteit(); break;
-        case 2: _t->deletegif_left(); break;
-        case 3: _t->deletegif_up(); break;
-        case 4: _t->deletegif_right(); break;
-        case 5: _t->deletegif_down(); break;
-        case 6: _t->up_quiet(); break;
-        case 7: _t->left_quiet(); break;
-        case 8: _t->down_quiet(); break;
-        case 9: _t->right_quiet(); break;
-        case 10: _t->on_stop_button_clicked(); break;
+        case 2: _t->up_quiet(); break;
+        case 3: _t->left_quiet(); break;
+        case 4: _t->down_quiet(); break;
+        case 5: _t->right_quiet(); break;
+        case 6: _t->on_stop_button_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -156,13 +139,13 @@ int MyMusic::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 7;
     }
     return _id;
 }

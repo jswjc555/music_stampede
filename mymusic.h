@@ -29,6 +29,7 @@ public:
     QWidget *w=0;
     int sencond;//总时长
     int n=0;//总卡点数
+    bool ispause=0;//判断游戏是否暂停
     gametype type;
     QList<int> sump;//卡点存储
     QFile *f=0;
@@ -39,6 +40,7 @@ public:
     int tm_label;
     int tm_lcd;
     int tm_left,tm_up,tm_down,tm_right;
+    int tmust_left,tmust_up,tmust_down,tmust_right;
     int min,sec;
     int combo=0;//连击
     QTimer sumtime;
@@ -47,7 +49,7 @@ public:
     QList<MyLabel*>flnum;
     int global_i[50][1];//全局i，用于判断消失的砖块的传参
 
-    explicit MyMusic(QWidget *parent,QWidget *w,gametype type=easy);
+    explicit MyMusic(QWidget *parent,QWidget *w,int music_no,gametype type=easy );
     ~MyMusic();
     int cha(int);
     void start();
@@ -64,13 +66,12 @@ private:
     QMovie *dis;
     QMovie *pingjia;
     QMovie *up_dis,*left_dis,*down_dis,*right_dis;
-    QImage *gif_quiet;
+    QImage *gif_quiet=nullptr;
+    QImage *left=nullptr,*up=nullptr,*down=nullptr,*right=nullptr;
+    QImage *long_key=0 ,*short_key=0,* main_back=0,* bar=0,* mode=0;
+    QImage *numm=nullptr,*num=nullptr;
 public slots:
     void deleteit();
-    void deletegif_left();
-    void deletegif_up();
-    void deletegif_right();
-    void deletegif_down();
     void up_quiet();
     void left_quiet();
     void down_quiet();

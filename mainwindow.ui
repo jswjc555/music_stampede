@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="start_page">
      <widget class="QPushButton" name="start_game">
@@ -80,7 +80,86 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="main_page"/>
+    <widget class="QWidget" name="mode_page">
+     <widget class="QLabel" name="background_mode">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>800</width>
+        <height>1000</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mode_normal_button">
+      <property name="geometry">
+       <rect>
+        <x>175</x>
+        <y>180</y>
+        <width>175</width>
+        <height>175</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mode_hard_button">
+      <property name="geometry">
+       <rect>
+        <x>175</x>
+        <y>370</y>
+        <width>175</width>
+        <height>175</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mode_back_button">
+      <property name="geometry">
+       <rect>
+        <x>175</x>
+        <y>600</y>
+        <width>175</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>返回</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="music_choose">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>180</y>
+        <width>191</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="roll_music_button">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>280</y>
+        <width>51</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>roll</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
  </widget>

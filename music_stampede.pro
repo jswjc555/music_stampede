@@ -27,21 +27,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     mylabel.cpp \
-    mymusic.cpp \
-    diffmusic.cpp
+    mymusic.cpp
 
 HEADERS += \
         mainwindow.h \
     mylabel.h \
-    mymusic.h \
-    diffmusic.h
+    mymusic.h
 
 FORMS += \
         mainwindow.ui \
-    mymusic.ui \
-    diffmusic.ui
+    mymusic.ui
 
 RESOURCES += \
-    music.qrc \
-    image.qrc
+    image.qrc \
+    music.qrc
+
+DISTFILES +=
 
